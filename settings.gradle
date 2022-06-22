@@ -1,0 +1,2 @@
+include ':renetik-android-json'
+project(':renetik-android-json').projectDir = file("library")
