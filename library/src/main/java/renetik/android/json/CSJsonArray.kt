@@ -15,7 +15,7 @@ open class CSJsonArray() : Iterable<Any?>, CSJsonArrayInterface {
 
     override fun toString() = super.toString() + toJsonString(formatted = true)
 
-    override fun asList(): List<*> = data
+    override fun toJsonList(): List<*> = data
 
     override fun iterator() = data.iterator()
 }

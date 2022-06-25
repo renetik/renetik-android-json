@@ -12,9 +12,9 @@ fun <T : CSJsonObject> T.load(data: String) = apply { load(data.parseJsonMap()!!
 fun <T : CSJsonObject> T.load(file: File) = load(file.readText())
 
 fun <T : CSJsonObject> T.loadAsset(file: String) =
-    load(app.assets.open(file).readText())
+	load(app.assets.open(file).readText())
 
-fun CSJsonObject.getObject(key: String) = getMap(key)?.let(::CSJsonObject)
+fun CSJsonObject.getObject(key: String) = getMap(key)?.let(CSJsonObject()::load)
 
 fun <T : CSJsonObject> T.clone() =
-    this::class.createInstance()!!.also { it.load(this.data) }
+	this::class.createInstance()!!.also { it.load(this.data) }

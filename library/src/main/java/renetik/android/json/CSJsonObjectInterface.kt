@@ -1,5 +1,5 @@
 package renetik.android.json
 
 interface CSJsonObjectInterface {
-    fun asStringMap(): Map<String, *>
+    fun toJsonMap(): Map<String, *>
 }
