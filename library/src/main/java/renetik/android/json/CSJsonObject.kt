@@ -2,23 +2,20 @@ package renetik.android.json
 
 import renetik.android.core.kotlin.collections.at
 import renetik.android.core.kotlin.primitives.toArray
+import renetik.android.core.kotlin.run
 import kotlin.reflect.KClass
 
 @Suppress("unchecked_cast")
 open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterface {
 
 	open val data = mutableMapOf<String, Any?>()
-
 	open fun load(data: Map<String, Any?>) = this.data.putAll(data)
 	open fun clear() = data.clear()
+	open fun clear(key: String) = data.run { it.remove(key) }
 
-	open fun clear(key: String) {
-		data.remove(key)
-	}
-
-	open fun set(key: String, value: String?) {
-		if (value != null && data[key] == value) return
-		data[key] = value
+	override fun set(key: String, string: String?) {
+		if (string != null && data[key] == string) return
+		data[key] = string
 	}
 
 	open fun set(key: String, value: Map<String, *>?) {
@@ -37,7 +34,7 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 
 	open fun set(key: String, value: List<*>?) {
 		if (value != null && data[key] == value) return
-		data[key] = value?.toList()
+		data[key] = value?.toJSONArray(forceString = true)
 	}
 
 	open fun getList(key: String): List<*>? = data[key] as? MutableList<Any?>
@@ -56,17 +53,14 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 	}
 
 	open fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
-		data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)?.let { map ->
-			type.createJsonObject(map).also { data[key] = it }
-		}
+		data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)
+			?.let { map -> type.createJsonObject(map).also { data[key] = it } }
 
-	override fun toString() = super.toString() + toJsonString(formatted = true)
+	override fun toString() = super.toString() + toJson(formatted = true)
 	override fun toJsonMap(): Map<String, *> = data
-
 	override fun equals(other: Any?) =
 		(other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
 
 	override fun hashCode() = data.hashCode()
-
 	override fun iterator(): Iterator<Map.Entry<String, Any?>> = data.iterator()
 }

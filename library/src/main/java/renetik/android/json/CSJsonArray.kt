@@ -13,7 +13,7 @@ open class CSJsonArray() : Iterable<Any?>, CSJsonArrayInterface {
 
     fun load(list: List<Any?>) = apply { data.addAll(list) }
 
-    override fun toString() = super.toString() + toJsonString(formatted = true)
+    override fun toString() = super.toString() + toJson(formatted = true)
 
     override fun toJsonList(): List<*> = data
 
