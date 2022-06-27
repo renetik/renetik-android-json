@@ -1,0 +1,1 @@
+sourceset_dependencies='{":renetik-android-json:dokkaHtml/androidTestRelease":[],":renetik-android-json:dokkaHtml/debug":[],":renetik-android-json:dokkaHtml/main":[],":renetik-android-json:dokkaHtml/release":[],":renetik-android-json:dokkaHtml/testFixtures":[],":renetik-android-json:dokkaHtml/testFixturesDebug":[],":renetik-android-json:dokkaHtml/testFixturesRelease":[]}'
