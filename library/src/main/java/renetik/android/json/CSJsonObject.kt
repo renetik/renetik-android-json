@@ -1,7 +1,6 @@
 package renetik.android.json
 
 import renetik.android.core.kotlin.collections.at
-import renetik.android.core.kotlin.primitives.toArray
 import renetik.android.core.kotlin.run
 import kotlin.reflect.KClass
 
@@ -9,37 +8,20 @@ import kotlin.reflect.KClass
 open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterface {
 
 	open val data = mutableMapOf<String, Any?>()
-	open fun load(data: Map<String, Any?>) = this.data.putAll(data)
+	open fun load(data: Map<String, Any?>) {
+		this.data.putAll(data)
+		onLoaded()
+	}
+
+	open fun onLoaded() = Unit
 	open fun clear() = data.clear()
 	open fun clear(key: String) = data.run { it.remove(key) }
 
-	override fun set(key: String, string: String?) {
-		if (string != null && data[key] == string) return
-		data[key] = string
-	}
+	override fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
+		data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)
+			?.let { map -> type.createJsonObject(map).also { data[key] = it } }
 
-	open fun set(key: String, value: Map<String, *>?) {
-		if (value != null && data[key] == value) return
-		data[key] = value?.toMap()
-	}
-
-	open fun getMap(key: String) = data[key] as? MutableMap<String, Any?>
-
-	open fun set(key: String, value: Array<*>?) {
-		if (value != null && data[key] == value) return
-		data[key] = value?.toArray()
-	}
-
-	open fun getArray(key: String): Array<*>? = getList(key)?.toTypedArray()
-
-	open fun set(key: String, value: List<*>?) {
-		if (value != null && data[key] == value) return
-		data[key] = value?.toJSONArray(forceString = true)
-	}
-
-	open fun getList(key: String): List<*>? = data[key] as? MutableList<Any?>
-
-	open fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? {
+	override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? {
 		val isFirstItemJsonObject = ((data[key] as? List<*>)?.at(0) as? T) != null
 		return if (isFirstItemJsonObject) data[key] as List<T> else
 			(data[key] as? List<MutableMap<String, Any?>>)?.let { list ->
@@ -47,14 +29,40 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 			}
 	}
 
-	open fun <T : CSJsonObject> set(key: String, value: T?) {
+	fun <T : CSJsonObject> getJsonObjectMap(
+		key: String, type: KClass<T>): Map<String, T>? {
+		val isFirstItemJsonObject = ((data[key] as? Map<String, *>)
+			?.values?.firstOrNull() as? T) != null
+		return if (isFirstItemJsonObject) data[key] as Map<String, T> else
+			(data[key] as? Map<String, MutableMap<String, Any?>>)?.let { map ->
+				type.createJsonObjectMap(map).also { data[key] = it }
+			}
+	}
+
+	override fun set(key: String, string: String?) {
+		if (string != null && data[key] == string) return
+		data[key] = string
+	}
+
+	override fun set(key: String, value: Array<*>?) {
+		if (value != null && data[key] == value) return
+		data[key] = value?.toJSONArray()
+	}
+
+	override fun set(key: String, value: List<*>?) {
+		if (value != null && data[key] == value) return
+		data[key] = value?.toJSONArray()
+	}
+
+	override fun set(key: String, value: Map<String, *>?) {
+		if (value != null && data[key] == value) return
+		data[key] = value?.toJSONObject()
+	}
+
+	override fun <T : CSJsonObject> set(key: String, value: T?) {
 		if (value != null && data[key] == value) return
 		data[key] = value
 	}
-
-	open fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
-		data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)
-			?.let { map -> type.createJsonObject(map).also { data[key] = it } }
 
 	override fun toString() = super.toString() + toJson(formatted = true)
 	override fun toJsonMap(): Map<String, *> = data
