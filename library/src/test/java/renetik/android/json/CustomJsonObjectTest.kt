@@ -28,7 +28,7 @@ class CustomJsonObjectTest {
 		}
 	}
 
-	val testObjectInstance = TestObject("testObject",
+	private val testObjectInstance = TestObject("testObject",
 		mapOf("key1" to true, "key2" to false),
 		listOf(1.2, 3.4, 5.0))
 
@@ -51,7 +51,7 @@ class CustomJsonObjectTest {
 	fun customJsonObjectSetGetTest() {
 		val json = CSJsonObject().apply { set("key", testObjectInstance) }.toJson(formatted = true)
 		assertEquals(exceptedJson, json)
-		val value = CSJsonObject().apply { load(json) }.getJsonObject("key", TestObject::class)
+		val value = CSJsonObject(json).getJsonObject("key", TestObject::class)
 		assertEquals(testObjectInstance, value)
 	}
 
@@ -72,7 +72,7 @@ class CustomJsonObjectTest {
 	fun customJsonObjectSetGetTest2() {
 		val json = testObjectInstance.toJson(formatted = true)
 		assertEquals(exceptedJson2, json)
-		val value = TestObject().apply { load(json) }
+		val value = TestObject().load(json)
 		assertEquals(testObjectInstance, value)
 	}
 }

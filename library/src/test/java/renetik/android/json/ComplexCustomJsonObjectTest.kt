@@ -57,7 +57,7 @@ class ComplexCustomJsonObjectTest {
 	fun customJsonObjectSetGetTest2() {
 		val json = testObjectInstance.toJson(formatted = true)
 		assertEquals(exceptedJson, json)
-		val value = TestObject().apply { load(json) }
+		val value = TestObject().load(json)
 		assertEquals(testObjectInstance, value)
 	}
 }

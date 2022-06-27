@@ -5,7 +5,10 @@ import renetik.android.core.java.io.readText
 import renetik.android.core.kotlin.reflect.createInstance
 import java.io.File
 
+
 fun CSJsonObject.toJsonObject() = data.toJSONObject()
+
+fun CSJsonObject(data: String) = CSJsonObject().load(data)
 
 fun <T : CSJsonObject> T.load(data: String) = apply { load(data.parseJsonMap()!!) }
 
