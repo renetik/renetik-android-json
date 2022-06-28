@@ -59,7 +59,8 @@ class ComplexCustomJsonObjectTest {
 		}
 	}
 
-	private val expectedJson = """{
+	private val expectedJson = """
+{
   "mapKey": {
     "mapKey2": {
       "stringKey": "mapTestObject2"
@@ -77,9 +78,7 @@ class ComplexCustomJsonObjectTest {
       "stringKey": "listTestObject2"
     }
   ]
-}"""
+}""".trimStart()
 }
-
-
 ```
 
