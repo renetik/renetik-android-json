@@ -25,7 +25,9 @@ dependencies {
 }
 ```
 
-#Example:
+## Example:
+```
+class ComplexCustomJsonObjectTest {
 
 	data class TestObject(
 		var string: String? = null,
@@ -45,4 +47,39 @@ dependencies {
 		}
 	}
 
+	private val testObjectInstance = TestObject("testObject",
+		mapOf("key1" to TestObject("testObject2"), "key2" to TestObject("testObject2")),
+		listOf(TestObject("testObject4"), TestObject("testObject5")))
+
+
+	private val expectedJson = """{
+  "mapKey": {
+    "key1": {
+      "stringKey": "testObject2"
+    },
+    "key2": {
+      "stringKey": "testObject2"
+    }
+  },
+  "stringKey": "testObject",
+  "listKey": [
+    {
+      "stringKey": "testObject4"
+    },
+    {
+      "stringKey": "testObject5"
+    }
+  ]
+}"""
+
+	@Test
+	fun customJsonObjectSetGetTest2() {
+		val json = testObjectInstance.toJson(formatted = true)
+		assertEquals(expectedJson, json)
+		val value = TestObject().load(json)
+		assertEquals(testObjectInstance, value)
+	}
+}
+
+```
 
