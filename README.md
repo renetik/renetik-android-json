@@ -31,13 +31,14 @@ class ComplexCustomJsonObjectTest {
 
 	@Test
 	fun customJsonObjectSetGetTest2() {
-		val testObjectInstance = TestObject("testObject",
-			mapOf("key1" to TestObject("testObject2"), "key2" to TestObject("testObject2")),
-			listOf(TestObject("testObject4"), TestObject("testObject5")))
-		val json = testObjectInstance.toJson(formatted = true)
+		val testObject = TestObject("testObject",
+			mapOf("mapKey1" to TestObject("mapTestObject1"),
+				"mapKey2" to TestObject("mapTestObject2")),
+			listOf(TestObject("listTestObject1"), TestObject("listTestObject2")))
+		val json = testObject.toJson(formatted = true)
 		Assert.assertEquals(expectedJson, json)
 		val value = TestObject().load(json)
-		Assert.assertEquals(testObjectInstance, value)
+		Assert.assertEquals(testObject, value)
 	}
 
 	data class TestObject(
@@ -60,20 +61,20 @@ class ComplexCustomJsonObjectTest {
 
 	private val expectedJson = """{
   "mapKey": {
-    "key1": {
-      "stringKey": "testObject2"
+    "mapKey2": {
+      "stringKey": "mapTestObject2"
     },
-    "key2": {
-      "stringKey": "testObject2"
+    "mapKey1": {
+      "stringKey": "mapTestObject1"
     }
   },
   "stringKey": "testObject",
   "listKey": [
     {
-      "stringKey": "testObject4"
+      "stringKey": "listTestObject1"
     },
     {
-      "stringKey": "testObject5"
+      "stringKey": "listTestObject2"
     }
   ]
 }"""
