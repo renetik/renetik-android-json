@@ -3,10 +3,10 @@ package renetik.android.json
 import org.json.JSONArray
 import org.json.JSONObject
 import renetik.android.core.kotlin.asString
-import renetik.android.json.obj.CSJsonObjectInterface
 import renetik.android.json.array.CSJsonArrayInterface
+import renetik.android.json.obj.CSJsonObjectInterface
 
-fun Any.toJson(forceString: Boolean = false, formatted: Boolean = CSJson.forceString): String {
+fun Any.toJson(forceString: Boolean = CSJson.forceString, formatted: Boolean = false): String {
 	val jsonType = toJsonType(forceString)
 	if (formatted) {
 		if (jsonType is JSONArray) return jsonType.toString(2)
@@ -16,16 +16,16 @@ fun Any.toJson(forceString: Boolean = false, formatted: Boolean = CSJson.forceSt
 }
 
 @Suppress("UNCHECKED_CAST")
-private fun Any?.toJsonType(forceString: Boolean = CSJson.forceString): Any? {
+fun Any?.toJsonType(forceString: Boolean = CSJson.forceString): Any? {
 	if (this is JSONObject || this is JSONArray) return this
 	if (forceString) {
 		if (this is String) return this
 	} else if (this is Number || this is String || this is Boolean) return this
-	return (this as? Map<String, *>)?.toJSONObject()
-		?: (this as? Array<*>)?.toJSONArray()
-		?: (this as? List<*>)?.toJSONArray()
-		?: (this as? CSJsonObjectInterface)?.toJsonMap()?.toJSONObject()
-		?: (this as? CSJsonArrayInterface)?.toJsonList()?.toJSONArray()
+	return (this as? Map<String, *>)?.toJSONObject(forceString)
+		?: (this as? Array<*>)?.toJSONArray(forceString)
+		?: (this as? List<*>)?.toJSONArray(forceString)
+		?: (this as? CSJsonObjectInterface)?.toJsonMap()?.toJSONObject(forceString)
+		?: (this as? CSJsonArrayInterface)?.toJsonList()?.toJSONArray(forceString)
 		?: this?.asString
 }
 

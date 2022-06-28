@@ -5,6 +5,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import renetik.android.json.CSJson.forceString
 import renetik.android.json.obj.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -20,7 +21,8 @@ class JsonObjectTest {
 	}
 
 	@Test
-	fun jsonObjectStoreBoolean() {
+	fun jsonObjectStoreBooleanAsString() {
+		forceString = true
 		val json = CSJsonObject().apply { set("key", false) }.toJson()
 		assertEquals("""{"key":"false"}""", json)
 		val value = CSJsonObject(json).getBoolean("key")
@@ -28,7 +30,17 @@ class JsonObjectTest {
 	}
 
 	@Test
+	fun jsonObjectStoreBoolean() {
+		forceString = false
+		val json = CSJsonObject().apply { set("key", false) }.toJson()
+		assertEquals("""{"key":false}""", json)
+		val value = CSJsonObject(json).getBoolean("key")
+		assertEquals(value, false)
+	}
+
+	@Test
 	fun jsonObjectStoreInt() {
+		forceString = true
 		val json = CSJsonObject().apply { set("key", int = 345) }.toJson()
 		assertEquals("""{"key":"345"}""", json)
 		val value = CSJsonObject(json).getInt("key")
@@ -37,6 +49,7 @@ class JsonObjectTest {
 
 	@Test
 	fun jsonObjectStoreDouble() {
+		forceString = true
 		val json = CSJsonObject().apply { set("key", 213131.131331) }.toJson()
 		assertEquals("""{"key":"213131.131331"}""", json)
 		val value = CSJsonObject(json).getDouble("key")
@@ -55,6 +68,7 @@ class JsonObjectTest {
 
 	@Test
 	fun jsonObjectStoreListFloat() {
+		forceString = false
 		val value: List<Float> = listOf(1f, 2.5f, 32349.89f)
 		val json = CSJsonObject().apply { set("key", value) }.toJson()
 		assertEquals("""{"key":[1,2.5,32349.89]}""", json)
@@ -64,7 +78,19 @@ class JsonObjectTest {
 	}
 
 	@Test
+	fun jsonObjectStoreListDoubleAsString() {
+		forceString = true
+		val value: List<Double> = listOf(1.0, 2.5, 32349.89)
+		val json = CSJsonObject().apply { set("key", value) }.toJson()
+		assertEquals("""{"key":["1.0","2.5","32349.89"]}""", json)
+		val jsonObject = CSJsonObject(json)
+		assertEquals(value, jsonObject.getDoubleList("key"))
+		assertEquals(listOf("1.0", "2.5", "32349.89"), jsonObject.getStringList("key"))
+	}
+
+	@Test
 	fun jsonObjectStoreListDouble() {
+		forceString = false
 		val value: List<Double> = listOf(1.0, 2.5, 32349.89)
 		val json = CSJsonObject().apply { set("key", value) }.toJson()
 		assertEquals("""{"key":[1,2.5,32349.89]}""", json)
@@ -75,6 +101,7 @@ class JsonObjectTest {
 
 	@Test
 	fun jsonObjectStoreMapString() {
+		forceString = false
 		val value: Map<String, String> =
 			mapOf("key1" to "value1", "key2" to "value2", "key3" to "value3")
 		val json = CSJsonObject().apply { set("key", value) }.toJson()
@@ -85,6 +112,7 @@ class JsonObjectTest {
 
 	@Test
 	fun jsonObjectStoreIntMapToStringMap() {
+		forceString = false
 		val value: Map<String, Double> = mapOf("key1" to 1.2, "key2" to 2.3, "key3" to 3.4)
 		val json = CSJsonObject().apply { set("key", value) }.toJson()
 		assertEquals("""{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}""", json)
@@ -97,6 +125,7 @@ class JsonObjectTest {
 
 	@Test
 	fun jsonObjectStoreIntMapForceString() {
+		forceString = false
 		val value: Map<String, Double> = mapOf("key1" to 1.2, "key2" to 2.3, "key3" to 3.4)
 		val json = CSJsonObject().apply { set("key", value) }.toJson()
 		assertEquals("""{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}""", json)

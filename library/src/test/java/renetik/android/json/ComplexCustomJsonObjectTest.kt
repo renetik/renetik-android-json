@@ -1,6 +1,6 @@
 package renetik.android.json
 
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -11,18 +11,38 @@ import renetik.android.json.obj.load
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 class ComplexCustomJsonObjectTest {
+	@Test
+	fun customJsonObjectSetGetTest2() {
+		val testObject = TestObject("testObject",
+			mapOf("mapKey1" to TestObject("mapTestObject1"),
+				"mapKey2" to TestObject("mapTestObject2")),
+			listOf(TestObject("listTestObject1"), TestObject("listTestObject2")))
+		val json = testObject.toJson(formatted = true)
+		Assert.assertEquals(expectedJson, json)
+		val value = TestObject().load(json)
+		Assert.assertEquals(testObject, value)
+	}
 
+	/**
+	 * Create custom types by extending CSJsonObject
+	 */
 	data class TestObject(
 		var string: String? = null,
 		var map: Map<String, TestObject>? = null,
 		var list: List<TestObject>? = null) : CSJsonObject() {
 
+		/**
+		 *   Use 'fun set(key: String,...' functions to save values using your keys
+		 */
 		init {
 			set("stringKey", string)
 			set("mapKey", map)
 			set("listKey", list)
 		}
 
+		/**
+		 *   Use 'fun get...' functions to retrieve values
+		 */
 		override fun onLoaded() {
 			string = get("stringKey")
 			map = getJsonObjectMap("mapKey", TestObject::class)
@@ -30,36 +50,24 @@ class ComplexCustomJsonObjectTest {
 		}
 	}
 
-	private val testObjectInstance = TestObject("testObject",
-		mapOf("key1" to TestObject("testObject2"), "key2" to TestObject("testObject2")),
-		listOf(TestObject("testObject4"), TestObject("testObject5")))
-
-
-	private val exceptedJson = """{
+	private val expectedJson = """
+{
   "mapKey": {
-    "key1": {
-      "stringKey": "testObject2"
+    "mapKey2": {
+      "stringKey": "mapTestObject2"
     },
-    "key2": {
-      "stringKey": "testObject2"
+    "mapKey1": {
+      "stringKey": "mapTestObject1"
     }
   },
   "stringKey": "testObject",
   "listKey": [
     {
-      "stringKey": "testObject4"
+      "stringKey": "listTestObject1"
     },
     {
-      "stringKey": "testObject5"
+      "stringKey": "listTestObject2"
     }
   ]
-}"""
-
-	@Test
-	fun customJsonObjectSetGetTest2() {
-		val json = testObjectInstance.toJson(formatted = true)
-		assertEquals(exceptedJson, json)
-		val value = TestObject().load(json)
-		assertEquals(testObjectInstance, value)
-	}
+}""".trimStart()
 }

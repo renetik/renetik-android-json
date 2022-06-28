@@ -40,10 +40,14 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 			}
 	}
 
-	override fun set(key: String, string: String?) {
-		if (string != null && data[key] == string) return
-		data[key] = string
-	}
+	fun set(key: String, value: Any?) = data.set(key, value.toJsonType())
+
+	override fun set(key: String, string: String?) = set(key, string as Any?)
+	override fun set(key: String, boolean: Boolean?) = set(key, boolean as Any?)
+	override fun set(key: String, int: Int?) = set(key, int as Any?)
+	override fun set(key: String, long: Long?) = set(key, long as Any?)
+	override fun set(key: String, float: Float?) = set(key, float as Any?)
+	override fun set(key: String, double: Double?) = set(key, double as Any?)
 
 	override fun set(key: String, value: Array<*>?) {
 		if (value != null && data[key] == value) return
