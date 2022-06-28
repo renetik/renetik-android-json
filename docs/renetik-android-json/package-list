@@ -48,7 +48,13 @@ $dokka.location:renetik.android.json.obj/CSJsonObject/iterator/#/PointingToDecla
 $dokka.location:renetik.android.json.obj/CSJsonObject/load/#kotlin.collections.Map[kotlin.String,kotlin.Any?]/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/load.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/onLoaded/#/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/on-loaded.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#TypeParam(bounds=[renetik.android.json.obj.CSJsonObject])?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Any?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Array[*]?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Boolean?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Double?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Float?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Int?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
+$dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.Long?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.String?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.collections.List[*]?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.collections.Map[kotlin.String,*]?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
@@ -96,6 +102,7 @@ $dokka.location:renetik.android.json//toJSONArray/kotlin.Array[*]#kotlin.Boolean
 $dokka.location:renetik.android.json//toJSONArray/kotlin.collections.List[*]#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-j-s-o-n-array.html
 $dokka.location:renetik.android.json//toJSONObject/kotlin.collections.Map[kotlin.String,*]#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-j-s-o-n-object.html
 $dokka.location:renetik.android.json//toJson/kotlin.Any#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json.html
+$dokka.location:renetik.android.json//toJsonType/kotlin.Any?#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json-type.html
 $dokka.location:renetik.android.json/CSJson///PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/index.html
 $dokka.location:renetik.android.json/CSJson/forceString/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/force-string.html
 renetik.android.json
