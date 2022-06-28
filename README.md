@@ -29,6 +29,17 @@ dependencies {
 ```
 class ComplexCustomJsonObjectTest {
 
+	@Test
+	fun customJsonObjectSetGetTest2() {
+		val testObjectInstance = TestObject("testObject",
+			mapOf("key1" to TestObject("testObject2"), "key2" to TestObject("testObject2")),
+			listOf(TestObject("testObject4"), TestObject("testObject5")))
+		val json = testObjectInstance.toJson(formatted = true)
+		Assert.assertEquals(expectedJson, json)
+		val value = TestObject().load(json)
+		Assert.assertEquals(testObjectInstance, value)
+	}
+
 	data class TestObject(
 		var string: String? = null,
 		var map: Map<String, TestObject>? = null,
@@ -46,11 +57,6 @@ class ComplexCustomJsonObjectTest {
 			list = getJsonObjectList("listKey", TestObject::class)
 		}
 	}
-
-	private val testObjectInstance = TestObject("testObject",
-		mapOf("key1" to TestObject("testObject2"), "key2" to TestObject("testObject2")),
-		listOf(TestObject("testObject4"), TestObject("testObject5")))
-
 
 	private val expectedJson = """{
   "mapKey": {
@@ -71,15 +77,8 @@ class ComplexCustomJsonObjectTest {
     }
   ]
 }"""
-
-	@Test
-	fun customJsonObjectSetGetTest2() {
-		val json = testObjectInstance.toJson(formatted = true)
-		assertEquals(expectedJson, json)
-		val value = TestObject().load(json)
-		assertEquals(testObjectInstance, value)
-	}
 }
+
 
 ```
 
