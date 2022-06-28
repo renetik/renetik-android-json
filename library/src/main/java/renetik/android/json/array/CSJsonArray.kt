@@ -1,4 +1,6 @@
-package renetik.android.json
+package renetik.android.json.array
+
+import renetik.android.json.toJson
 
 @Suppress("unchecked_cast")
 open class CSJsonArray() : Iterable<Any?>, CSJsonArrayInterface {

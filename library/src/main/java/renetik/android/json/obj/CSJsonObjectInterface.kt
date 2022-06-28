@@ -1,4 +1,4 @@
-package renetik.android.json
+package renetik.android.json.obj
 
 import renetik.android.core.kotlin.*
 import renetik.android.core.kotlin.primitives.asDouble

@@ -1,6 +1,7 @@
-package renetik.android.json
+package renetik.android.json.array
 
 import org.json.JSONArray
+import renetik.android.json.*
 
 fun CSJsonArray.toJsonArray(): JSONArray = toJsonList().toJSONArray()
 fun <T : CSJsonArray> T.load(data: String) = apply { load(data.parseJsonList()!!) }

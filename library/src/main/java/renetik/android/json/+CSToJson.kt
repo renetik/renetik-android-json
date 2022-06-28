@@ -3,6 +3,8 @@ package renetik.android.json
 import org.json.JSONArray
 import org.json.JSONObject
 import renetik.android.core.kotlin.asString
+import renetik.android.json.obj.CSJsonObjectInterface
+import renetik.android.json.array.CSJsonArrayInterface
 
 fun Any.toJson(forceString: Boolean = false, formatted: Boolean = CSJson.forceString): String {
 	val jsonType = toJsonType(forceString)

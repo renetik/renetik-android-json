@@ -1,7 +1,8 @@
-package renetik.android.json
+package renetik.android.json.obj
 
 import renetik.android.core.kotlin.collections.at
 import renetik.android.core.kotlin.run
+import renetik.android.json.*
 import kotlin.reflect.KClass
 
 @Suppress("unchecked_cast")
