@@ -15,6 +15,7 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 	}
 
 	open fun onLoaded() = Unit
+	open fun onChange() = Unit
 	open fun clear() = data.clear()
 	open fun clear(key: String) = data.run { it.remove(key) }
 
@@ -40,14 +41,19 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 			}
 	}
 
-	fun set(key: String, value: Any?) = data.set(key, value.toJsonType())
+	fun setValue(key: String, value: Any?) {
+		val jsonValue = value.toJsonType()
+		if (value != null && data[key] == jsonValue) return
+		data[key] = jsonValue
+		onChange()
+	}
 
-	override fun set(key: String, string: String?) = set(key, string as Any?)
-	override fun set(key: String, boolean: Boolean?) = set(key, boolean as Any?)
-	override fun set(key: String, int: Int?) = set(key, int as Any?)
-	override fun set(key: String, long: Long?) = set(key, long as Any?)
-	override fun set(key: String, float: Float?) = set(key, float as Any?)
-	override fun set(key: String, double: Double?) = set(key, double as Any?)
+	override fun set(key: String, string: String?) = setValue(key, string)
+	override fun set(key: String, boolean: Boolean?) = setValue(key, boolean)
+	override fun set(key: String, int: Int?) = setValue(key, int)
+	override fun set(key: String, long: Long?) = setValue(key, long)
+	override fun set(key: String, float: Float?) = setValue(key, float)
+	override fun set(key: String, double: Double?) = setValue(key, double)
 
 	override fun set(key: String, value: Array<*>?) {
 		if (value != null && data[key] == value) return
