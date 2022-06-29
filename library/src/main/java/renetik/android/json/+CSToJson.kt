@@ -6,7 +6,7 @@ import renetik.android.core.kotlin.asString
 import renetik.android.json.array.CSJsonArrayInterface
 import renetik.android.json.obj.CSJsonObjectInterface
 
-fun Any.toJson(forceString: Boolean = CSJson.forceString, formatted: Boolean = false): String {
+fun Any.toJson(forceString: Boolean = CSJson.forceStringInJson, formatted: Boolean = false): String {
 	val jsonType = toJsonType(forceString)
 	if (formatted) {
 		if (jsonType is JSONArray) return jsonType.toString(2)
@@ -16,7 +16,7 @@ fun Any.toJson(forceString: Boolean = CSJson.forceString, formatted: Boolean = f
 }
 
 @Suppress("UNCHECKED_CAST")
-fun Any?.toJsonType(forceString: Boolean = CSJson.forceString): Any? {
+fun Any?.toJsonType(forceString: Boolean = CSJson.forceStringInJson): Any? {
 	if (this is JSONObject || this is JSONArray) return this
 	if (forceString) {
 		if (this is String) return this
@@ -29,19 +29,19 @@ fun Any?.toJsonType(forceString: Boolean = CSJson.forceString): Any? {
 		?: this?.asString
 }
 
-fun List<*>.toJSONArray(forceString: Boolean = CSJson.forceString): JSONArray {
+fun List<*>.toJSONArray(forceString: Boolean = CSJson.forceStringInJson): JSONArray {
 	val jsonArray = JSONArray()
 	for (entry in this) jsonArray.put(entry.toJsonType(forceString))
 	return jsonArray
 }
 
-fun Array<*>.toJSONArray(forceString: Boolean = CSJson.forceString): JSONArray {
+fun Array<*>.toJSONArray(forceString: Boolean = CSJson.forceStringInJson): JSONArray {
 	val jsonArray = JSONArray()
 	for (entry in this) jsonArray.put(entry.toJsonType(forceString))
 	return jsonArray
 }
 
-fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceString): JSONObject {
+fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceStringInJson): JSONObject {
 	val jsonObject = JSONObject()
 	for (entry in entries)
 		jsonObject.put(entry.key, entry.value.toJsonType(forceString))

@@ -58,7 +58,6 @@ $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.String?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.collections.List[*]?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/set/#kotlin.String#kotlin.collections.Map[kotlin.String,*]?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set.html
-$dokka.location:renetik.android.json.obj/CSJsonObject/setValue/#kotlin.String#kotlin.Any?/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/set-value.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/toJsonMap/#/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/to-json-map.html
 $dokka.location:renetik.android.json.obj/CSJsonObject/toString/#/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object/to-string.html
 $dokka.location:renetik.android.json.obj/CSJsonObjectInterface///PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object-interface/index.html
@@ -105,7 +104,7 @@ $dokka.location:renetik.android.json//toJSONObject/kotlin.collections.Map[kotlin
 $dokka.location:renetik.android.json//toJson/kotlin.Any#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json.html
 $dokka.location:renetik.android.json//toJsonType/kotlin.Any?#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json-type.html
 $dokka.location:renetik.android.json/CSJson///PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/index.html
-$dokka.location:renetik.android.json/CSJson/forceString/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/force-string.html
+$dokka.location:renetik.android.json/CSJson/forceStringInJson/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/force-string-in-json.html
 renetik.android.json
 renetik.android.json.array
 renetik.android.json.obj

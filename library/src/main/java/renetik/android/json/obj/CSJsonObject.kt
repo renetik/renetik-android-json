@@ -41,7 +41,7 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
 			}
 	}
 
-	fun setValue(key: String, value: Any?) {
+	private fun setValue(key: String, value: Any?) {
 		val jsonValue = value.toJsonType()
 		if (value != null && data[key] == jsonValue) return
 		data[key] = jsonValue

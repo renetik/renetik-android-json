@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import renetik.android.json.CSJson.forceString
+import renetik.android.json.CSJson.forceStringInJson
 import renetik.android.json.obj.CSJsonObject
 
 @RunWith(RobolectricTestRunner::class)
@@ -17,14 +17,14 @@ class JsonObjectForceStringClearTest {
 	 */
 	@Test
 	fun jsonObjectStoreBooleanClear() {
-		forceString = true
+		forceStringInJson = true
 		val stringJsonObject = CSJsonObject().apply {
 			set("key1", false)
 			set("key2", "value2")
 			set("key3", 1.3)
 		}
 		assertEquals("""{"key1":"false","key2":"value2","key3":"1.3"}""", stringJsonObject.toJson())
-		forceString = false
+		forceStringInJson = false
 		val jsonObject = CSJsonObject().apply {
 			set("key1", false)
 			set("key2", "value2")
