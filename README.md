@@ -1,11 +1,12 @@
 <!---Header--->
 [![Android CI](https://github.com/renetik/renetik-android-json/workflows/Android%20CI/badge.svg)
 ](https://github.com/renetik/renetik-android-json/actions/workflows/android.yml)
+# Renetik Android Json
 #### [https://github.com/renetik/renetik-android-json](https://github.com/renetik/renetik-android-json/)
 #### [Documentation](https://renetik.github.io/renetik-android-json/)
 Framework to enjoy, improve and speed up your application development while writing readable code.
-Used as library for music production and performance app Renetik Instruments www.renetik.com as well
-as other projects.
+Used as library in music production and performance app Renetik Instruments www.renetik.com as well
+as in other projects.
 
 ```gradle
 allprojects {
@@ -24,7 +25,7 @@ dependencies {
 }
 ```
 
-## Examples:
+## Examples from included unit tests:
 ```
 class ComplexCustomJsonObjectTest {
 	@Test
