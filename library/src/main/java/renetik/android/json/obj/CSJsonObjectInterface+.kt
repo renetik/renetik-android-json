@@ -1,6 +1,8 @@
 package renetik.android.json.obj
 
 import renetik.android.core.kotlin.*
+import renetik.android.core.kotlin.reflect.createInstance
+import kotlin.reflect.KClass
 
 fun CSJsonObjectInterface.getStringList(key: String): List<String>? =
     getList(key)?.map { it.asString }
@@ -39,4 +41,21 @@ fun CSJsonObjectInterface.getFloatMap(key: String): Map<String, Float?>? =
 fun <T> CSJsonObjectInterface.getValue(key: String, values: Iterable<T>): T? {
     val savedString = get(key) ?: return null
     return values.find { it.toId() == savedString }
+}
+
+@Suppress("unchecked_cast")
+fun <T : CSJsonObject> CSJsonObjectInterface.getJsonListList(key: String, type: KClass<T>)
+        : MutableList<List<T>>? {
+    val playsData = getList(key) ?: return null
+    val plays = mutableListOf<List<T>>()
+    for (keyPlayData in playsData) {
+        val keyPlay = mutableListOf<T>()
+        for (playNoteData in keyPlayData as List<Map<String, Any?>>) {
+            val notePlay = type.createInstance()!!
+            notePlay.load(playNoteData)
+            keyPlay.add(notePlay)
+        }
+        plays.add(keyPlay)
+    }
+    return plays
 }
