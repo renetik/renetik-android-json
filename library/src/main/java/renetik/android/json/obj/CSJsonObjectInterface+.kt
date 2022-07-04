@@ -59,3 +59,9 @@ fun <T : CSJsonObject> CSJsonObjectInterface.getJsonListList(key: String, type: 
     }
     return plays
 }
+
+inline fun <reified T : CSJsonObject> CSJsonObjectInterface.getJsonObject(key: String): T? =
+    getJsonObject(key, T::class)
+
+inline fun <reified T : CSJsonObject> CSJsonObjectInterface.getJsonObjectList(
+    key: String): List<T>? = getJsonObjectList(key, T::class)

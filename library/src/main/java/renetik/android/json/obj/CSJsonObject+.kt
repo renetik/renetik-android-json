@@ -11,7 +11,7 @@ fun CSJsonObject.toJsonObject() = data.toJSONObject()
 
 fun CSJsonObject(data: String) = CSJsonObject().load(data)
 
-fun <T : CSJsonObject> T.load(data: String) = apply { load(data.parseJsonMap()!!) }
+fun <T : CSJsonObject> T.load(json: String) = apply { load(json.parseJsonMap()!!) }
 
 fun <T : CSJsonObject> T.load(file: File) = load(file.readText())
 
