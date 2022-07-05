@@ -52,15 +52,15 @@ class ComplexCustomJsonObjectTest {
 
     private val expectedJson = """
 {
+  "stringKey": "testObject",
   "mapKey": {
-    "mapKey2": {
-      "stringKey": "mapTestObject2"
-    },
     "mapKey1": {
       "stringKey": "mapTestObject1"
+    },
+    "mapKey2": {
+      "stringKey": "mapTestObject2"
     }
   },
-  "stringKey": "testObject",
   "listKey": [
     {
       "stringKey": "listTestObject1"

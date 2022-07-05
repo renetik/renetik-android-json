@@ -22,13 +22,13 @@ class CustomJsonObjectTest {
 		init {
 			set("stringKey", string)
 			set("mapKey", map)
-			set("arrayKey", list)
+			set("listKey", list)
 		}
 
 		override fun onLoaded() {
 			string = get("stringKey")
 			map = getBooleanMap("mapKey", default = false)
-			list = getDoubleList("arrayKey", default = 0.0)
+			list = getDoubleList("listKey", default = 0.0)
 		}
 	}
 
@@ -38,12 +38,12 @@ class CustomJsonObjectTest {
 
 	private val exceptedJson = """{
   "key": {
+    "stringKey": "testObject",
     "mapKey": {
       "key1": true,
       "key2": false
     },
-    "stringKey": "testObject",
-    "arrayKey": [
+    "listKey": [
       1.2,
       3.4,
       5
@@ -60,12 +60,12 @@ class CustomJsonObjectTest {
 	}
 
 	private val exceptedJson2 = """{
+  "stringKey": "testObject",
   "mapKey": {
     "key1": true,
     "key2": false
   },
-  "stringKey": "testObject",
-  "arrayKey": [
+  "listKey": [
     1.2,
     3.4,
     5
