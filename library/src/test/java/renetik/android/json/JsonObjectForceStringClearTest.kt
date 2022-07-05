@@ -9,7 +9,6 @@ import renetik.android.json.CSJson.forceStringInJson
 import renetik.android.json.obj.CSJsonObject
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class JsonObjectForceStringClearTest {
 	/**
 	 * You can force strings while store on to json conversion ,

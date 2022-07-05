@@ -9,7 +9,6 @@ import renetik.android.json.CSJson.forceStringInJson
 import renetik.android.json.obj.*
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class JsonObjectTest {
 
 	@Test

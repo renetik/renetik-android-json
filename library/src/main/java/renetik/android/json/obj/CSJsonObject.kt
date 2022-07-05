@@ -1,7 +1,7 @@
 package renetik.android.json.obj
 
 import renetik.android.core.kotlin.collections.at
-import renetik.android.core.kotlin.run
+import renetik.android.core.kotlin.primitives.toArray
 import renetik.android.json.*
 import kotlin.reflect.KClass
 
@@ -12,12 +12,16 @@ open class CSJsonObject : CSJsonObjectInterface {
     open fun load(data: Map<String, Any?>) {
         this.data.putAll(data)
         onLoaded()
+        onChange()
     }
 
     open fun onLoaded() = Unit
     open fun onChange() = Unit
-    open fun clear() = data.clear()
-    open fun clear(key: String) = data.run { it.remove(key) }
+    override fun clear() = data.clear()
+    override fun clear(key: String) {
+        if (data.remove(key) == null) return
+        onChange()
+    }
 
     override fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
         data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)
@@ -57,19 +61,22 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     override fun set(key: String, value: Array<*>?) {
         if (value != null && data[key] == value) return
-        data[key] = value?.toJSONArray()
+//        data[key] = value?.toJSONArray()
+        data[key] = value?.toArray()
         onChange()
     }
 
     override fun set(key: String, value: List<*>?) {
         if (value != null && data[key] == value) return
-        data[key] = value?.toJSONArray()
+//        data[key] = value?.toJSONArray()
+        data[key] = value?.toList()
         onChange()
     }
 
     override fun set(key: String, value: Map<String, *>?) {
         if (value != null && data[key] == value) return
-        data[key] = value?.toJSONObject()
+//        data[key] = value?.toJSONObject()
+        data[key] = value?.toMap()
         onChange()
     }
 
@@ -82,7 +89,9 @@ open class CSJsonObject : CSJsonObjectInterface {
     override val jsonMap: Map<String, *> by lazy { data }
     override fun toString() = super.toString() + toJson()
     override fun equals(other: Any?) =
-        (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
+        (other as? CSJsonObject)?.let {
+            it.data == data
+        } ?: super.equals(other)
 
     override fun hashCode() = data.hashCode()
 }

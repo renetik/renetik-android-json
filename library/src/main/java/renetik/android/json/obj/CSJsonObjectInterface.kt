@@ -11,6 +11,8 @@ interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
     override fun iterator(): Iterator<Map.Entry<String, Any?>> = jsonMap.iterator()
 
     fun has(key: String): Boolean = jsonMap.containsKey(key)
+    fun clear(key: String)
+    fun clear()
     fun get(key: String): String? = jsonMap[key]?.toString()
 
     fun getString(key: String, default: String): String = get(key) ?: default
