@@ -1,5 +1,5 @@
 <!---Header--->
-[![Android Build](https://github.com/renetik/renetik-android-json/workflows/Android%20CI/badge.svg)
+[![Android Build](https://github.com/renetik/renetik-android-json/workflows/Android%20Build/badge.svg)
 ](https://github.com/renetik/renetik-android-json/actions/workflows/android.yml)
 # Renetik Android Json
 
