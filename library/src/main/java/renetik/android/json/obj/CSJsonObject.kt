@@ -6,9 +6,9 @@ import renetik.android.json.*
 import kotlin.reflect.KClass
 
 @Suppress("unchecked_cast")
-open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterface {
+open class CSJsonObject : CSJsonObjectInterface {
 
-    open val data = mutableMapOf<String, Any?>()
+    open val data: MutableMap<String, Any?> = mutableMapOf()
     open fun load(data: Map<String, Any?>) {
         this.data.putAll(data)
         onLoaded()
@@ -58,28 +58,31 @@ open class CSJsonObject : Iterable<Map.Entry<String, Any?>>, CSJsonObjectInterfa
     override fun set(key: String, value: Array<*>?) {
         if (value != null && data[key] == value) return
         data[key] = value?.toJSONArray()
+        onChange()
     }
 
     override fun set(key: String, value: List<*>?) {
         if (value != null && data[key] == value) return
         data[key] = value?.toJSONArray()
+        onChange()
     }
 
     override fun set(key: String, value: Map<String, *>?) {
         if (value != null && data[key] == value) return
         data[key] = value?.toJSONObject()
+        onChange()
     }
 
     override fun <T : CSJsonObject> set(key: String, value: T?) {
         if (value != null && data[key] == value) return
         data[key] = value
+        onChange()
     }
 
-    override fun toString() = super.toString() + toJson(formatted = true)
-    override fun toJsonMap(): Map<String, *> = data
+    override val jsonMap: Map<String, *> by lazy { data }
+    override fun toString() = super.toString() + toJson()
     override fun equals(other: Any?) =
         (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
 
     override fun hashCode() = data.hashCode()
-    override fun iterator(): Iterator<Map.Entry<String, Any?>> = data.iterator()
 }

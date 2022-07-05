@@ -25,7 +25,7 @@ fun Any?.toJsonType(forceString: Boolean = CSJson.forceStringInJson): Any? {
     return (this as? Map<String, *>)?.toJSONObject(forceString)
         ?: (this as? Array<*>)?.toJSONArray(forceString)
         ?: (this as? List<*>)?.toJSONArray(forceString)
-        ?: (this as? CSJsonObjectInterface)?.toJsonMap()?.toJSONObject(forceString)
+        ?: (this as? CSJsonObjectInterface)?.jsonMap?.toJSONObject(forceString)
         ?: (this as? CSJsonArrayInterface)?.toJsonList()?.toJSONArray(forceString)
         ?: this.asString
 }

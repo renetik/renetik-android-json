@@ -6,11 +6,12 @@ import renetik.android.core.kotlin.primitives.asInt
 import renetik.android.core.kotlin.primitives.asLong
 import kotlin.reflect.KClass
 
-interface CSJsonObjectInterface {
-    fun toJsonMap(): Map<String, *>
+interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
+    val jsonMap: Map<String, *>
+    override fun iterator(): Iterator<Map.Entry<String, Any?>> = jsonMap.iterator()
 
-    fun has(key: String): Boolean = toJsonMap().containsKey(key)
-    fun get(key: String): String? = toJsonMap()[key]?.toString()
+    fun has(key: String): Boolean = jsonMap.containsKey(key)
+    fun get(key: String): String? = jsonMap[key]?.toString()
 
     fun getString(key: String, default: String): String = get(key) ?: default
     fun getString(key: String): String? = get(key)
@@ -31,10 +32,10 @@ interface CSJsonObjectInterface {
     fun getDouble(key: String, default: Double): Double = get(key)?.asDouble() ?: default
     fun getDouble(key: String, default: Double? = null): Double? = get(key)?.asDouble() ?: default
 
-    fun getList(key: String) = toJsonMap()[key] as? List<Any?>
+    fun getList(key: String) = jsonMap[key] as? List<Any?>
 
     @Suppress("UNCHECKED_CAST")
-    fun getMap(key: String) = toJsonMap()[key] as? Map<String, Any?>
+    fun getMap(key: String) = jsonMap[key] as? Map<String, Any?>
 
     fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T?
     fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>?
