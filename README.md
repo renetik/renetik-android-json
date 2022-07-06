@@ -27,7 +27,7 @@ dependencies {
 ```
 
 ## Examples from included unit tests:
-```
+```kotlin
 class ComplexCustomJsonObjectTest {
 	@Test
 	fun customJsonObjectSetGetTest2() {
@@ -91,7 +91,7 @@ class ComplexCustomJsonObjectTest {
 }
 ```
 ## You can force strings while store on to json conversion, also you can choose to have formatted text.
-```
+```kotlin
 class JsonObjectForceStringClearTest {
 	@Test
 	fun jsonObjectStoreBooleanClear() {
