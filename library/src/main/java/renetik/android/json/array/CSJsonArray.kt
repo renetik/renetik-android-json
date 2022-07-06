@@ -17,7 +17,8 @@ open class CSJsonArray() : Iterable<Any?>, CSJsonArrayInterface {
 
     override fun toString() = super.toString() + toJson(formatted = true)
 
-    override fun toJsonList(): List<*> = data
+    override val jsonList: List<*>
+        get() = data
 
     override fun iterator() = data.iterator()
 }
