@@ -26,59 +26,59 @@ dependencies {
 }
 ```
 
-## Examples from included unit tests:
+## Examples
 ```kotlin
 class ComplexCustomJsonObjectTest {
-	@Test
-	fun customJsonObjectSetGetTest2() {
-		val testObject = TestObject("testObject",
-			mapOf("mapKey1" to TestObject("mapTestObject1"),
-				"mapKey2" to TestObject("mapTestObject2")),
-			listOf(TestObject("listTestObject1"), TestObject("listTestObject2")))
-		val json = testObject.toJson(formatted = true)
-		Assert.assertEquals(expectedJson, json)
-		val value = TestObject().load(json)
-		Assert.assertEquals(testObject, value)
-	}
+    @Test
+    fun customJsonObjectSetGetTest2() {
+        val testObject = TestObject("testObject",
+            mapOf("mapKey1" to TestObject("mapTestObject1"),
+                "mapKey2" to TestObject("mapTestObject2")),
+            listOf(TestObject("listTestObject1"), TestObject("listTestObject2")))
+        val json = testObject.toJson(formatted = true)
+        Assert.assertEquals(expectedJson, json)
+        val value = TestObject().load(json)
+        Assert.assertEquals(testObject, value)
+    }
 
-	/**
-	 * Create custom types by extending CSJsonObject
-	 */
-	data class TestObject(
-		var string: String? = null,
-		var map: Map<String, TestObject>? = null,
-		var list: List<TestObject>? = null) : CSJsonObject() {
+    /**
+     * Create custom types by extending CSJsonObject
+     */
+    data class TestObject(
+        var string: String? = null,
+        var map: Map<String, TestObject>? = null,
+        var list: List<TestObject>? = null) : CSJsonObject() {
 
-		/**
-		 *   Use 'fun set(key: String,...' functions to save values using your keys
-		 */
-		init {
-			set("stringKey", string)
-			set("mapKey", map)
-			set("listKey", list)
-		}
+        /**
+         *   Use 'fun set(key: String,...' functions to save values using your keys
+         */
+        init {
+            string?.let { set("stringKey", it) }
+            map?.let { set("mapKey", it) }
+            list?.let { set("listKey", it) }
+        }
 
-		/**
-		 *   Use 'fun get...' functions to retrieve values
-		 */
-		override fun onLoaded() {
-			string = get("stringKey")
-			map = getJsonObjectMap("mapKey", TestObject::class)
-			list = getJsonObjectList("listKey", TestObject::class)
-		}
-	}
+        /**
+         *   Use 'fun get...' functions to retrieve values
+         */
+        override fun onLoaded() {
+            string = get("stringKey")
+            map = getJsonObjectMap("mapKey", TestObject::class)
+            list = getJsonObjectList("listKey", TestObject::class)
+        }
+    }
 
-	private val expectedJson = """
+    private val expectedJson = """
 {
+  "stringKey": "testObject",
   "mapKey": {
-    "mapKey2": {
-      "stringKey": "mapTestObject2"
-    },
     "mapKey1": {
       "stringKey": "mapTestObject1"
+    },
+    "mapKey2": {
+      "stringKey": "mapTestObject2"
     }
   },
-  "stringKey": "testObject",
   "listKey": [
     {
       "stringKey": "listTestObject1"
@@ -90,38 +90,40 @@ class ComplexCustomJsonObjectTest {
 }""".trimStart()
 }
 ```
-## You can force strings while store on to json conversion, also you can choose to have formatted text.
 ```kotlin
 class JsonObjectForceStringClearTest {
-	@Test
-	fun jsonObjectStoreBooleanClear() {
-		forceString = true
-		val stringJsonObject = CSJsonObject().apply {
-			set("key1", false)
-			set("key2", "value2")
-			set("key3", 1.3)
-		}
-		assertEquals("""{"key1":"false","key2":"value2","key3":"1.3"}""", stringJsonObject.toJson())
-		
-		forceString = false
-		val jsonObject = CSJsonObject().apply {
-			set("key1", false)
-			set("key2", "value2")
-			set("key3", 1.3)
-		}
-		assertEquals("""{"key1":false,"key2":"value2","key3":1.3}""", jsonObject.toJson())
-		assertEquals("""{"key1":"false","key2":"value2","key3":"1.3"}""",
-			jsonObject.toJson(forceString = true))
-			
-		assertEquals("""{
+    /**
+     * You can force strings while store on to json conversion ,
+     * also you can choose to have formatted text
+     */
+    @Test
+    fun jsonObjectStoreBooleanClear() {
+        forceStringInJson = true
+        val stringJsonObject = CSJsonObject().apply {
+            set("key1", false)
+            set("key2", "value2")
+            set("key3", 1.3)
+        }
+        assertEquals("""{"key1":"false","key2":"value2","key3":"1.3"}""", stringJsonObject.toJson())
+        forceStringInJson = false
+        val jsonObject = CSJsonObject().apply {
+            set("key1", false)
+            set("key2", "value2")
+            set("key3", 1.3)
+        }
+        assertEquals("""{"key1":false,"key2":"value2","key3":1.3}""", jsonObject.toJson())
+        assertEquals("""{"key1":"false","key2":"value2","key3":"1.3"}""",
+            jsonObject.toJson(forceString = true))
+
+        assertEquals("""{
   "key1": false,
   "key2": "value2",
   "key3": 1.3
 }""", jsonObject.toJson(formatted = true))
 
-		jsonObject.clear("key2");jsonObject.clear("key3")
-		assertEquals("""{"key1":false}""", jsonObject.toJson())
-	}
+        jsonObject.clear("key2");jsonObject.clear("key3")
+        assertEquals("""{"key1":false}""", jsonObject.toJson())
+    }
 }
 ```
 
