@@ -82,7 +82,7 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     override fun <T : CSJsonObject> set(key: String, value: T?) {
         if (value != null && data[key] == value) return
-        data[key] = value
+        data[key] = value?.jsonMap
         onChange()
     }
 
