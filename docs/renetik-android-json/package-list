@@ -9,12 +9,12 @@ $dokka.location:renetik.android.json.array/CSJsonArray/CSJsonArray/#/PointingToD
 $dokka.location:renetik.android.json.array/CSJsonArray/CSJsonArray/#kotlin.collections.List[kotlin.Any?]/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/-c-s-json-array.html
 $dokka.location:renetik.android.json.array/CSJsonArray/index/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/--index--.html
 $dokka.location:renetik.android.json.array/CSJsonArray/iterator/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/iterator.html
+$dokka.location:renetik.android.json.array/CSJsonArray/jsonList/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/json-list.html
 $dokka.location:renetik.android.json.array/CSJsonArray/key/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/key.html
 $dokka.location:renetik.android.json.array/CSJsonArray/load/#kotlin.collections.List[kotlin.Any?]/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/load.html
-$dokka.location:renetik.android.json.array/CSJsonArray/toJsonList/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/to-json-list.html
 $dokka.location:renetik.android.json.array/CSJsonArray/toString/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array/to-string.html
 $dokka.location:renetik.android.json.array/CSJsonArrayInterface///PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array-interface/index.html
-$dokka.location:renetik.android.json.array/CSJsonArrayInterface/toJsonList/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array-interface/to-json-list.html
+$dokka.location:renetik.android.json.array/CSJsonArrayInterface/jsonList/#/PointingToDeclaration/renetik-android-json/renetik.android.json.array/-c-s-json-array-interface/json-list.html
 $dokka.location:renetik.android.json.obj////PointingToDeclaration/renetik-android-json/renetik.android.json.obj/index.html
 $dokka.location:renetik.android.json.obj//CSJsonObject/#kotlin.String/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/-c-s-json-object.html
 $dokka.location:renetik.android.json.obj//clone/TypeParam(bounds=[renetik.android.json.obj.CSJsonObject])#/PointingToDeclaration/renetik-android-json/renetik.android.json.obj/clone.html
