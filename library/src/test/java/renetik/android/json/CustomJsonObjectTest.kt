@@ -11,7 +11,6 @@ import renetik.android.json.obj.getDoubleList
 import renetik.android.json.obj.load
 
 @RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class CustomJsonObjectTest {
 
 	data class TestObject(
