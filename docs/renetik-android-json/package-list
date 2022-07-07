@@ -110,7 +110,6 @@ $dokka.location:renetik.android.json//toJSONObject/kotlin.collections.Map[kotlin
 $dokka.location:renetik.android.json//toJson/kotlin.Any#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json.html
 $dokka.location:renetik.android.json//toJsonType/kotlin.Any?#kotlin.Boolean/PointingToDeclaration/renetik-android-json/renetik.android.json/to-json-type.html
 $dokka.location:renetik.android.json/CSJson///PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/index.html
-$dokka.location:renetik.android.json/CSJson/disableJsonFormat/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/disable-json-format.html
 $dokka.location:renetik.android.json/CSJson/forceStringInJson/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/force-string-in-json.html
 $dokka.location:renetik.android.json/CSJson/isJsonFormatted/#/PointingToDeclaration/renetik-android-json/renetik.android.json/-c-s-json/is-json-formatted.html
 renetik.android.json
