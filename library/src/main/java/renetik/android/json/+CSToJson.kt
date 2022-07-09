@@ -7,8 +7,8 @@ import renetik.android.core.kotlin.asString
 import renetik.android.json.array.CSJsonArrayInterface
 import renetik.android.json.obj.CSJsonObjectInterface
 
-fun Any.toJson(forceString: Boolean = CSJson.forceStringInJson,
-               formatted: Boolean = CSJson.isJsonFormatted): String {
+fun Any.toJson(forceString: Boolean = CSJson.forceString,
+               formatted: Boolean = CSJson.isJsonPretty): String {
     val jsonType = toJsonType(forceString)
     if (formatted) {
         if (jsonType is JSONArray) return jsonType.toString(2)
@@ -18,7 +18,7 @@ fun Any.toJson(forceString: Boolean = CSJson.forceStringInJson,
 }
 
 @Suppress("UNCHECKED_CAST")
-fun Any?.toJsonType(forceString: Boolean = CSJson.forceStringInJson): Any? {
+fun Any?.toJsonType(forceString: Boolean = CSJson.forceString): Any? {
     if (this == null) return NULL
     if (this == NULL || this is JSONObject || this is JSONArray || this is String) return this
     if (!forceString && (this is Number || this is Boolean)) return this
@@ -30,19 +30,19 @@ fun Any?.toJsonType(forceString: Boolean = CSJson.forceStringInJson): Any? {
         ?: this.asString
 }
 
-fun List<*>.toJSONArray(forceString: Boolean = CSJson.forceStringInJson): JSONArray {
+fun List<*>.toJSONArray(forceString: Boolean = CSJson.forceString): JSONArray {
     val jsonArray = JSONArray()
     for (entry in this) jsonArray.put(entry.toJsonType(forceString))
     return jsonArray
 }
 
-fun Array<*>.toJSONArray(forceString: Boolean = CSJson.forceStringInJson): JSONArray {
+fun Array<*>.toJSONArray(forceString: Boolean = CSJson.forceString): JSONArray {
     val jsonArray = JSONArray()
     for (entry in this) jsonArray.put(entry.toJsonType(forceString))
     return jsonArray
 }
 
-fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceStringInJson): JSONObject {
+fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceString): JSONObject {
     val jsonObject = JSONObject()
     for (entry in entries)
         jsonObject.put(entry.key, entry.value.toJsonType(forceString))

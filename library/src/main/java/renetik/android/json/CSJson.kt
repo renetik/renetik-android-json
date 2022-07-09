@@ -1,6 +1,6 @@
 package renetik.android.json
 
 object CSJson {
-    var forceStringInJson = false
-    var isJsonFormatted = false
+    var forceString = false
+    var isJsonPretty = false
 }
