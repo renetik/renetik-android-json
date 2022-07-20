@@ -61,21 +61,18 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     override fun set(key: String, value: Array<*>?) {
         if (value != null && data[key] == value) return
-//        data[key] = value?.toJSONArray()
         data[key] = value?.toArray()
         onChange()
     }
 
     override fun set(key: String, value: List<*>?) {
         if (value != null && data[key] == value) return
-//        data[key] = value?.toJSONArray()
         data[key] = value?.toList()
         onChange()
     }
 
     override fun set(key: String, value: Map<String, *>?) {
         if (value != null && data[key] == value) return
-//        data[key] = value?.toJSONObject()
         data[key] = value?.toMap()
         onChange()
     }
@@ -88,10 +85,9 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     override val jsonMap: Map<String, *> by lazy { data }
     override fun toString() = super.toString() + toJson()
-    override fun equals(other: Any?) =
-        (other as? CSJsonObject)?.let {
-            it.data == data
-        } ?: super.equals(other)
+
+    override fun equals(other: Any?) = (other as? CSJsonObject)
+        ?.let { it.data == data } ?: super.equals(other)
 
     override fun hashCode() = data.hashCode()
 }
