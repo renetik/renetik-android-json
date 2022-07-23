@@ -1,11 +1,13 @@
 package renetik.android.json
 
+import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import renetik.android.json.CSJson.forceString
 import renetik.android.json.obj.*
+import java.lang.Boolean
 
 @RunWith(RobolectricTestRunner::class)
 class JsonObjectTest {
@@ -131,5 +133,25 @@ class JsonObjectTest {
             jsonObject.getStringMap("key"))
         assertEquals(mapOf("key1" to 1.2f, "key2" to 2.3f, "key3" to 3.4f),
             jsonObject.getFloatMap("key"))
+    }
+
+    @Test
+    fun testOrdered() {
+        val obj = mutableMapOf<String, Any?>()
+        obj.put("a", "foo1")
+        obj.put("b", Integer(100))
+        obj.put("c", java.lang.Double(1000.21))
+        obj.put("d", Boolean(true))
+        obj.put("e", "foo2")
+        obj.put("f", "foo3")
+        obj.put("g", "foo4")
+        obj.put("h", "foo5")
+        obj.put("x", null)
+
+        val json = JSONObject(obj)
+
+        val expectedJsonString =
+            """{"a":"foo1","b":100,"c":1000.21,"d":true,"e":"foo2","f":"foo3","g":"foo4","h":"foo5","x":null}"""
+        assertEquals(expectedJsonString, json.toString())
     }
 }

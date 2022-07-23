@@ -53,7 +53,8 @@ class ComplexJsonObjectTest {
         val instance = ComplexJsonObject("testObject",
             mapOf("mapKey1" to ComplexJsonObject("mapTestObject1"),
                 "mapKey2" to ComplexJsonObject("mapTestObject2")),
-            listOf(ComplexJsonObject("listTestObject1"), ComplexJsonObject("listTestObject2")))
+            listOf(ComplexJsonObject("listTestObject1"),
+                ComplexJsonObject("listTestObject2")))
 
         Assert.assertEquals(expectedJson, instance.toJson(formatted = true))
         Assert.assertEquals(instance, ComplexJsonObject().load(expectedJson))

@@ -7,6 +7,7 @@ import renetik.android.core.kotlin.asString
 import renetik.android.json.array.CSJsonArrayInterface
 import renetik.android.json.obj.CSJsonObjectInterface
 
+
 fun Any.toJson(forceString: Boolean = CSJson.forceString,
                formatted: Boolean = CSJson.isJsonPretty): String {
     val jsonType = toJsonType(forceString)
@@ -42,9 +43,7 @@ fun Array<*>.toJSONArray(forceString: Boolean = CSJson.forceString): JSONArray {
     return jsonArray
 }
 
-fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceString): JSONObject {
-    val jsonObject = JSONObject()
-    for (entry in entries)
-        jsonObject.put(entry.key, entry.value.toJsonType(forceString))
-    return jsonObject
-}
+fun Map<String, *>.toJSONObject(forceString: Boolean = CSJson.forceString): JSONObject =
+    CSJson.JSONObject().also { jsonObject ->
+        entries.forEach { jsonObject.put(it.key, it.value.toJsonType(forceString)) }
+    }
