@@ -24,10 +24,13 @@ open class CSJsonObject : CSJsonObjectInterface {
     }
 
     override fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
+//        (data[key] as? MutableMap<String, Any?>)?.let(type::createJsonObject)
         data[key] as? T ?: (data[key] as? MutableMap<String, Any?>)
             ?.let { map -> type.createJsonObject(map).also { data[key] = it } }
 
+    // We will create every time JsonObject because of equals issue
     override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? {
+//        (data[key] as? List<MutableMap<String, Any?>>)?.let(type::createJsonObjectList)
         val isFirstItemJsonObject = ((data[key] as? List<*>)?.at(0) as? T) != null
         return if (isFirstItemJsonObject) data[key] as List<T> else
             (data[key] as? List<MutableMap<String, Any?>>)?.let { list ->
@@ -35,8 +38,8 @@ open class CSJsonObject : CSJsonObjectInterface {
             }
     }
 
-    fun <T : CSJsonObject> getJsonObjectMap(
-        key: String, type: KClass<T>): Map<String, T>? {
+    fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>? {
+//        return (data[key] as? Map<String, MutableMap<String, Any?>>)?.let(type::createJsonObjectMap)
         val isFirstItemJsonObject = ((data[key] as? Map<String, *>)
             ?.values?.firstOrNull() as? T) != null
         return if (isFirstItemJsonObject) data[key] as Map<String, T> else
@@ -86,8 +89,10 @@ open class CSJsonObject : CSJsonObjectInterface {
     override val jsonMap: Map<String, *> by lazy { data }
     override fun toString() = super.toString() + toJson()
 
-    override fun equals(other: Any?) = (other as? CSJsonObject)
-        ?.let { it.data == data } ?: super.equals(other)
+    override fun equals(other: Any?) =
+        (other as? CSJsonObject)?.let { it.data == data }
+//            ?: (other as? Map<String, Any?>)?.let { it == data }
+            ?: super.equals(other)
 
     override fun hashCode() = data.hashCode()
 }
