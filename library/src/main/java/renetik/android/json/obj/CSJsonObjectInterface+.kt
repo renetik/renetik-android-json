@@ -44,20 +44,20 @@ fun <T> CSJsonObjectInterface.getValue(key: String, values: Iterable<T>): T? {
 }
 
 @Suppress("unchecked_cast")
-fun <T : CSJsonObject> CSJsonObjectInterface.getJsonListList(key: String, type: KClass<T>)
-        : MutableList<List<T>>? {
-    val playsData = getList(key) ?: return null
-    val plays = mutableListOf<List<T>>()
-    for (keyPlayData in playsData) {
-        val keyPlay = mutableListOf<T>()
-        for (playNoteData in keyPlayData as List<Map<String, Any?>>) {
-            val notePlay = type.createInstance()!!
-            notePlay.load(playNoteData)
-            keyPlay.add(notePlay)
+fun <T : CSJsonObject> CSJsonObjectInterface.getJsonListList(
+    key: String, type: KClass<T>): MutableList<List<T>>? {
+    val storedList = getList(key) ?: return null
+    val createdList = mutableListOf<List<T>>()
+    for (storedChildList in storedList) {
+        val createdChildList = mutableListOf<T>()
+        for (storedChildListItem in storedChildList as List<Map<String, Any?>>) {
+            val createdChildListItem = type.createInstance()!!
+            createdChildListItem.load(storedChildListItem)
+            createdChildList.add(createdChildListItem)
         }
-        plays.add(keyPlay)
+        createdList.add(createdChildList)
     }
-    return plays
+    return createdList
 }
 
 inline fun <reified T : CSJsonObject> CSJsonObjectInterface.getJsonObject(key: String): T? =
