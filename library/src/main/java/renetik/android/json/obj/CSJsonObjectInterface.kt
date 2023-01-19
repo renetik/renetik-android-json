@@ -1,5 +1,6 @@
 package renetik.android.json.obj
 
+import org.json.JSONObject.NULL
 import renetik.android.core.kotlin.primitives.asDouble
 import renetik.android.core.kotlin.primitives.asFloat
 import renetik.android.core.kotlin.primitives.asInt
@@ -13,7 +14,10 @@ interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
     fun has(key: String): Boolean = jsonMap.containsKey(key)
     fun clear(key: String)
     fun clear()
-    fun get(key: String): String? = jsonMap[key]?.toString()
+    fun get(key: String): String? {
+        val value = jsonMap[key]
+        return if (value == NULL) null else value?.toString()
+    }
 
     fun getString(key: String, default: String): String = get(key) ?: default
     fun getString(key: String): String? = get(key)
