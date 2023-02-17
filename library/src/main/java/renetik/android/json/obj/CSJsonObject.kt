@@ -33,9 +33,8 @@ open class CSJsonObject : CSJsonObjectInterface {
     }
 
     // We will create every time JsonObject because of equals issue
-    override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? {
-        return (data[key] as? List<MutableMap<String, Any?>>)?.let(type::createJsonObjectList)
-    }
+    override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? =
+        (data[key] as? List<MutableMap<String, Any?>>)?.let { type.createJsonObjectList(it) }
 
     override fun <T : CSJsonObject> setJsonObjectList(key: String, list: List<T>?) {
         val value = list?.let { List(list.size) { list[it].data } }
