@@ -25,7 +25,7 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
         (data[key] as? MutableMap<String, Any?>)?.let(type::createJsonObject)
 
-    override fun <T : CSJsonObject> set(key: String, value: T?) {
+    override fun <T : CSJsonObject> setJsonObject(key: String, value: T?) {
         val map: Map<String, *>? = value?.jsonMap
         if (data[key] == map) return
         data[key] = map?.toMap()
