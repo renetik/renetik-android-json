@@ -43,9 +43,8 @@ open class CSJsonObject : CSJsonObjectInterface {
         onChange()
     }
 
-    fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>? {
-        return (data[key] as? Map<String, MutableMap<String, Any?>>)?.let(type::createJsonObjectMap)
-    }
+    fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>? =
+        (data[key] as? Map<String, MutableMap<String, Any?>>)?.let { type.createJsonObjectMap(it) }
 
     fun <T : CSJsonObject> setJsonObjectMap(key: String, map: Map<String, T>?) {
         val value = map?.let {
