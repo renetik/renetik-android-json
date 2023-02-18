@@ -36,7 +36,8 @@ open class CSJsonObject : CSJsonObjectInterface {
         (data[key] as? List<MutableMap<String, Any?>>)?.let { type.createJsonObjectList(it) }
 
     override fun <T : CSJsonObject> setJsonObjectList(key: String, list: List<T>?) {
-        val value = list?.let { List(list.size) { list[it].data } }
+        val value: List<MutableMap<String, Any?>>? =
+            list?.let { List(list.size) { list[it].data } }
         if (data[key] == value) return
         data[key] = value
         onChange()
@@ -46,10 +47,8 @@ open class CSJsonObject : CSJsonObjectInterface {
         (data[key] as? Map<String, MutableMap<String, Any?>>)?.let { type.createJsonObjectMap(it) }
 
     fun <T : CSJsonObject> setJsonObjectMap(key: String, map: Map<String, T>?) {
-        val value = map?.let {
-            buildMap<String, Map<String, Any?>>(map.size) {
-                map.forEach { (key, value) -> this[key] = value.data }
-            }
+        val value: Map<String, Map<String, Any?>>? = map?.let {
+            buildMap(map.size) { map.forEach { (key, value) -> this[key] = value.data } }
         }
         if (data[key] == value) return
         data[key] = value
