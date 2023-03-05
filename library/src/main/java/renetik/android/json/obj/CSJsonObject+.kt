@@ -5,6 +5,7 @@ import renetik.android.core.kotlin.reflect.createInstance
 import renetik.android.core.lang.CSEnvironment.app
 import renetik.android.json.parseJsonMap
 import renetik.android.json.toJSONObject
+import renetik.android.json.toJson
 import java.io.File
 
 fun CSJsonObject.toJsonObject() = data.toJSONObject()
@@ -21,3 +22,7 @@ fun CSJsonObject.getObject(key: String) = getMap(key)?.let(CSJsonObject()::load)
 
 fun <T : CSJsonObject> T.clone() =
     this::class.createInstance()!!.also { it.load(this.data) }
+
+fun <T : CSJsonObject> T.deepClone() = this::class.createInstance()!!.also {
+    it.load(this.data.toJson(forceString = false, formatted = false))
+}
