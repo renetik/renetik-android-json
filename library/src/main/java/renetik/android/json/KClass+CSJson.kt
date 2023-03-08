@@ -15,11 +15,11 @@ fun <T : CSJsonArray> KClass<T>.createJsonList(list: List<Any?>?): T =
     createInstance().apply { list.isNotNull { load(it) } }
 
 fun <T : CSJsonObject> KClass<T>.createJsonObjectList(data: List<Map<String, Any?>>?)
-        : MutableList<T> = list<T>().also { dataList ->
+    : MutableList<T> = list<T>().also { dataList ->
     data?.forEach { dataList.put(createJsonObject(it)) }
 }
 
 fun <T : CSJsonObject> KClass<T>.createJsonObjectMap(data: Map<String, Map<String, Any?>>?)
-        : MutableMap<String, T> = mutableMapOf<String, T>().also { dataList ->
+    : MutableMap<String, T> = mutableMapOf<String, T>().also { dataList ->
     data?.forEach { dataList[it.key] = createJsonObject(it.value) }
 }
