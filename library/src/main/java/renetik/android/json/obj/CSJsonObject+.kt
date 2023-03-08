@@ -23,6 +23,6 @@ fun CSJsonObject.getObject(key: String) = getMap(key)?.let(CSJsonObject()::load)
 fun <T : CSJsonObject> T.clone() =
     this::class.createInstance()!!.also { it.load(this.data) }
 
-fun <T : CSJsonObject> T.deepClone() = this::class.createInstance()!!.also {
+fun <T : CSJsonObject> T.cloneDeep() = this::class.createInstance()!!.also {
     it.load(this.data.toJson(forceString = false, formatted = false))
 }
