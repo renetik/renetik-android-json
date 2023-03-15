@@ -22,5 +22,5 @@ fun <T : CSJsonObject> T.clone() =
     this::class.createInstance()!!.also { it.load(this.data) }
 
 fun <T : CSJsonObject> T.cloneDeep() = this::class.createInstance()!!.also {
-    it.load(this.data.toJson(forceString = false, formatted = false))
+    it.load(data.toJson(forceString = false, formatted = false))
 }
