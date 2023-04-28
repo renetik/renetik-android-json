@@ -7,9 +7,10 @@ import renetik.android.core.kotlin.asString
 import renetik.android.json.array.CSJsonArrayInterface
 import renetik.android.json.obj.CSJsonObjectInterface
 
-
-fun Any.toJson(forceString: Boolean = CSJson.forceString,
-               formatted: Boolean = CSJson.isJsonPretty): String {
+fun Any.toJson(
+    forceString: Boolean = CSJson.forceString,
+    formatted: Boolean = CSJson.isJsonPretty,
+): String {
     val jsonType = toJsonType(forceString)
     if (formatted) {
         if (jsonType is JSONArray) return jsonType.toString(2)
