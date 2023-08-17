@@ -1,8 +1,8 @@
 package renetik.android.json.obj
 
+import kotlin.reflect.KClass
 import renetik.android.core.kotlin.primitives.toArray
 import renetik.android.json.*
-import kotlin.reflect.KClass
 
 @Suppress("unchecked_cast")
 open class CSJsonObject : CSJsonObjectInterface {
@@ -16,7 +16,12 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     open fun onLoaded() = Unit
     open fun onChange() = Unit
-    override fun clear() = data.clear()
+    override fun clear() {
+        if (data.isEmpty()) return
+        data.clear()
+        onChange()
+    }
+
     override fun clear(key: String) {
         if (data.remove(key) == null) return
         onChange()
