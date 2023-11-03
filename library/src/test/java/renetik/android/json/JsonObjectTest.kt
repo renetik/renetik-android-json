@@ -138,15 +138,15 @@ class JsonObjectTest {
     @Test
     fun testOrdered() {
         val obj = mutableMapOf<String, Any?>()
-        obj.put("a", "foo1")
-        obj.put("b", Integer(100))
-        obj.put("c", java.lang.Double(1000.21))
-        obj.put("d", Boolean(true))
-        obj.put("e", "foo2")
-        obj.put("f", "foo3")
-        obj.put("g", "foo4")
-        obj.put("h", "foo5")
-        obj.put("x", null)
+        obj["a"] = "foo1"
+        obj["b"] = 100
+        obj["c"] = 1000.21
+        obj["d"] = true
+        obj["e"] = "foo2"
+        obj["f"] = "foo3"
+        obj["g"] = "foo4"
+        obj["h"] = "foo5"
+        obj["x"] = null
 
         val json = JSONObject(obj)
 
