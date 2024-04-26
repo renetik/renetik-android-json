@@ -54,9 +54,6 @@ interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
     fun getMap(key: String) = jsonMap[key] as? Map<String, Any?>
     fun set(key: String, value: Map<String, *>?)
 
-//    fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>?
-//    fun <T : CSJsonObject> setJsonObjectMap(key: String, map: Map<String, T>?)
-
     fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T?
     fun <T : CSJsonObject> setJsonObject(key: String, value: T?)
 
