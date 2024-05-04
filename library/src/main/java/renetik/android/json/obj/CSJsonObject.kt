@@ -1,8 +1,11 @@
 package renetik.android.json.obj
 
-import kotlin.reflect.KClass
 import renetik.android.core.kotlin.primitives.toArray
-import renetik.android.json.*
+import renetik.android.json.createJsonObject
+import renetik.android.json.createJsonObjectList
+import renetik.android.json.createJsonObjectMap
+import renetik.android.json.toJsonType
+import kotlin.reflect.KClass
 
 @Suppress("unchecked_cast")
 open class CSJsonObject : CSJsonObjectInterface {
@@ -93,7 +96,6 @@ open class CSJsonObject : CSJsonObjectInterface {
     }
 
     override val jsonMap: Map<String, *> by lazy { data }
-    override fun toString() = super.toString() + toJson()
 
     override fun equals(other: Any?) =
         (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
