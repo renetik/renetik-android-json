@@ -6,8 +6,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import renetik.android.json.CSJson.forceString
-import renetik.android.json.obj.*
-import java.lang.Boolean
+import renetik.android.json.obj.CSJsonObject
+import renetik.android.json.obj.getDoubleList
+import renetik.android.json.obj.getFloatList
+import renetik.android.json.obj.getFloatMap
+import renetik.android.json.obj.getIntList
+import renetik.android.json.obj.getStringList
+import renetik.android.json.obj.getStringMap
 
 @RunWith(RobolectricTestRunner::class)
 class JsonObjectTest {
@@ -116,10 +121,14 @@ class JsonObjectTest {
         val json = CSJsonObject().apply { set("key", value) }.toJson()
         assertEquals("""{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}""", json)
         val jsonObject = CSJsonObject(json)
-        assertEquals(mapOf("key1" to "1.2", "key2" to "2.3", "key3" to "3.4"),
-            jsonObject.getStringMap("key"))
-        assertEquals(mapOf("key1" to 1.2f, "key2" to 2.3f, "key3" to 3.4f),
-            jsonObject.getFloatMap("key"))
+        assertEquals(
+            mapOf("key1" to "1.2", "key2" to "2.3", "key3" to "3.4"),
+            jsonObject.getStringMap("key")
+        )
+        assertEquals(
+            mapOf("key1" to 1.2f, "key2" to 2.3f, "key3" to 3.4f),
+            jsonObject.getFloatMap("key")
+        )
     }
 
     @Test
@@ -129,10 +138,14 @@ class JsonObjectTest {
         val json = CSJsonObject().apply { set("key", value) }.toJson()
         assertEquals("""{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}""", json)
         val jsonObject = CSJsonObject(json)
-        assertEquals(mapOf("key1" to "1.2", "key2" to "2.3", "key3" to "3.4"),
-            jsonObject.getStringMap("key"))
-        assertEquals(mapOf("key1" to 1.2f, "key2" to 2.3f, "key3" to 3.4f),
-            jsonObject.getFloatMap("key"))
+        assertEquals(
+            mapOf("key1" to "1.2", "key2" to "2.3", "key3" to "3.4"),
+            jsonObject.getStringMap("key")
+        )
+        assertEquals(
+            mapOf("key1" to 1.2f, "key2" to 2.3f, "key3" to 3.4f),
+            jsonObject.getFloatMap("key")
+        )
     }
 
     @Test
