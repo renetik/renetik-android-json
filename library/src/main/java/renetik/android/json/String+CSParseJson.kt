@@ -12,11 +12,8 @@ fun String.parseJsonMap(): MutableMap<String, Any?>? = parseJson<MutableMap<Stri
 
 fun String.parseJsonList(): MutableList<Any?>? = parseJson<MutableList<Any?>>()
 
-// Here reified needs to stay! otherwise return type gets erased and if createValueFromJsonType
-// returns different type we get ClassCastException..
-@Suppress("UNCHECKED_CAST")
 inline fun <reified Type> String.parseJson(): Type? =
-    catchWarnReturnNull<Any, JSONException> {
+    if (isBlank()) null else catchWarnReturnNull<Any, JSONException> {
         JSONTokener(this).nextValue()
     }.createValueFromJsonType() as? Type
 
