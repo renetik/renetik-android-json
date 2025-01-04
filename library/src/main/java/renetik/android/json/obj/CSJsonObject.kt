@@ -1,6 +1,5 @@
 package renetik.android.json.obj
 
-import renetik.android.core.kotlin.primitives.toArray
 import renetik.android.json.createJsonObject
 import renetik.android.json.createJsonObjectList
 import renetik.android.json.createJsonObjectMap
@@ -36,7 +35,7 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun <T : CSJsonObject> setJsonObject(key: String, value: T?) {
         val map: Map<String, *>? = value?.jsonMap
         if (data[key] == map) return
-        data[key] = map?.toMap()
+        data[key] = map?.toMutableMap()
         onChange()
     }
 
@@ -76,12 +75,6 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun set(key: String, long: Long?) = setValue(key, long)
     override fun set(key: String, float: Float?) = setValue(key, float)
     override fun set(key: String, double: Double?) = setValue(key, double)
-
-    override fun set(key: String, value: Array<*>?) {
-        if (value != null && data[key] == value) return
-        data[key] = value?.toArray()
-        onChange()
-    }
 
     override fun set(key: String, value: List<*>?) {
         if (value != null && data[key] == value) return

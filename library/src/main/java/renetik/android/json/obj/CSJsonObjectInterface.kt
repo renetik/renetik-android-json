@@ -48,8 +48,6 @@ interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
     fun getList(key: String) = jsonMap[key] as? List<Any?>
     fun set(key: String, value: List<*>?)
 
-    fun set(key: String, value: Array<*>?)
-
     @Suppress("UNCHECKED_CAST")
     fun getMap(key: String) = jsonMap[key] as? Map<String, Any?>
     fun set(key: String, value: Map<String, *>?)

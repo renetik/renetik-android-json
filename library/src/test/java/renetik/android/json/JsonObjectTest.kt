@@ -11,6 +11,7 @@ import renetik.android.json.obj.getDoubleList
 import renetik.android.json.obj.getFloatList
 import renetik.android.json.obj.getFloatMap
 import renetik.android.json.obj.getIntList
+import renetik.android.json.obj.getJsonObject
 import renetik.android.json.obj.getStringList
 import renetik.android.json.obj.getStringMap
 
@@ -166,5 +167,38 @@ class JsonObjectTest {
         val expectedJsonString =
             """{"a":"foo1","b":100,"c":1000.21,"d":true,"e":"foo2","f":"foo3","g":"foo4","h":"foo5","x":null}"""
         assertEquals(expectedJsonString, json.toString())
+    }
+
+    @Test
+    fun testStoreJsonObject() {
+        forceString = false
+        val value: Map<String, Double> = mapOf("key1" to 1.2, "key2" to 2.3, "key3" to 3.4)
+        val child = CSJsonObject().apply { set("key", value) }
+        val childJson = """{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}"""
+        assertEquals(childJson, child.toJson())
+
+        val parent = CSJsonObject().apply { setJsonObject("key", child) }
+        assertEquals("""{"key":{"key":{"key1":1.2,"key2":2.3,"key3":3.4}}}""", parent.toJson())
+
+        val child2 = parent.getJsonObject<CSJsonObject>("key")
+        assertEquals(child, child2)
+        assertEquals(childJson, child2!!.toJson())
+    }
+
+    // I need to be able to retrieve same empty object
+    // because some properties relies on this
+    @Test
+    fun testStoreEmptyJsonObject() {
+        forceString = false
+        val child = CSJsonObject()
+        val childJson = """{}"""
+        assertEquals(childJson, child.toJson())
+
+        val parent = CSJsonObject().apply { setJsonObject("key", child) }
+        assertEquals("""{"key":{}}""", parent.toJson())
+
+        val child2 = parent.getJsonObject<CSJsonObject>("key")
+        assertEquals(child, child2)
+        assertEquals(childJson, child2!!.toJson())
     }
 }
