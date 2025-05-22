@@ -21,6 +21,7 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun clear() {
         if (data.isEmpty()) return
         data.clear()
+        onLoaded()
         onChange()
     }
 
