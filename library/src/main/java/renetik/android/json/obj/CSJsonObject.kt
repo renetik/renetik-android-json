@@ -10,17 +10,19 @@ import kotlin.reflect.KClass
 open class CSJsonObject : CSJsonObjectInterface {
 
     open val data: MutableMap<String, Any?> = mutableMapOf()
+    open fun onLoad() = Unit
+    open fun onChange() = Unit
+
     open fun load(data: Map<String, Any?>) {
         this.data.putAll(data)
-        onLoaded()
+        onLoad()
         onChange()
     }
 
-    open fun onLoaded() = Unit
-    open fun onChange() = Unit
     override fun clear() {
         if (data.isEmpty()) return
         data.clear()
+        onLoad()
         onChange()
     }
 

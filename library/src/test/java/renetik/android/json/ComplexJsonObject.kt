@@ -13,7 +13,7 @@ data class ComplexJsonObject(
         list?.let { set("listKey", it) }
     }
 
-    override fun onLoaded() {
+    override fun onLoad() {
         string = get("stringKey")
         map = getJsonObjectMap("mapKey", ComplexJsonObject::class)
         list = getJsonObjectList("listKey", ComplexJsonObject::class)
