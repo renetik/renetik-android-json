@@ -1,5 +1,6 @@
 package renetik.android.json.obj
 
+import renetik.android.core.lang.CSEnvironment.isTestRunner
 import renetik.android.json.createJsonObject
 import renetik.android.json.createJsonObjectList
 import renetik.android.json.createJsonObjectMap
@@ -9,7 +10,9 @@ import kotlin.reflect.KClass
 @Suppress("unchecked_cast")
 open class CSJsonObject : CSJsonObjectInterface {
 
-    open val data: MutableMap<String, Any?> = mutableMapOf()
+    open val data: MutableMap<String, Any?> =
+        if (isTestRunner) sortedMapOf() else mutableMapOf()
+
     open fun onLoad() = Unit
     open fun onChange() = Unit
 
