@@ -9,16 +9,16 @@ import renetik.android.json.obj.load
 @RunWith(RobolectricTestRunner::class)
 class SimpleJsonObjectTest {
     private val exceptedJson: String = """{
-  "stringKey": "testObject",
-  "mapKey": {
-    "key1": true,
-    "key2": false
-  },
   "listKey": [
     1.2,
     3.4,
     5
-  ]
+  ],
+  "mapKey": {
+    "key1": true,
+    "key2": false
+  },
+  "stringKey": "testObject"
 }"""
 
     @Test

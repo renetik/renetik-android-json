@@ -10,7 +10,14 @@ import renetik.android.json.obj.load
 class ComplexJsonObjectTest {
     private val expectedJson = """
 {
-  "stringKey": "testObject",
+  "listKey": [
+    {
+      "stringKey": "listTestObject1"
+    },
+    {
+      "stringKey": "listTestObject2"
+    }
+  ],
   "mapKey": {
     "mapKey1": {
       "stringKey": "mapTestObject1"
@@ -19,14 +26,7 @@ class ComplexJsonObjectTest {
       "stringKey": "mapTestObject2"
     }
   },
-  "listKey": [
-    {
-      "stringKey": "listTestObject1"
-    },
-    {
-      "stringKey": "listTestObject2"
-    }
-  ]
+  "stringKey": "testObject"
 }""".trimStart()
 
     @Test
