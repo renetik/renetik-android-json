@@ -1,6 +1,5 @@
 package  renetik.android.json
 
-import renetik.android.core.java.lang.createInstance
 import renetik.android.core.kotlin.collections.list
 import renetik.android.json.array.CSJsonArray
 import renetik.android.json.obj.CSJsonObject
@@ -8,7 +7,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 
 fun <T : CSJsonObject> KClass<T>.createJsonObject(map: Map<String, Any?>?): T =
-    java.createInstance()!!.apply { map?.let(::load) }
+    createInstance().apply { map?.let(::load) }
 
 fun <T : CSJsonArray> KClass<T>.createJsonList(list: List<Any?>?): T =
     createInstance().apply { list?.let(::load) }
