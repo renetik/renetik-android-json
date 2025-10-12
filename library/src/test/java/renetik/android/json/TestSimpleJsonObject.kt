@@ -4,7 +4,7 @@ import renetik.android.json.obj.CSJsonObject
 import renetik.android.json.obj.getBooleanMap
 import renetik.android.json.obj.getDoubleList
 
-data class SimpleJsonObject(
+data class TestSimpleJsonObject(
     var string: String? = null,
     var map: Map<String, Boolean>? = null,
     var list: List<Double>? = null) : CSJsonObject() {

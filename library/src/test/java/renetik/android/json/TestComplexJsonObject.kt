@@ -2,10 +2,10 @@ package renetik.android.json
 
 import renetik.android.json.obj.CSJsonObject
 
-data class ComplexJsonObject(
+data class TestComplexJsonObject(
     var string: String? = null,
-    var map: Map<String, ComplexJsonObject>? = null,
-    var list: List<ComplexJsonObject>? = null) : CSJsonObject() {
+    var map: Map<String, TestComplexJsonObject>? = null,
+    var list: List<TestComplexJsonObject>? = null) : CSJsonObject() {
 
     init {
         string?.let { set("stringKey", it) }
@@ -15,7 +15,7 @@ data class ComplexJsonObject(
 
     override fun onLoad() {
         string = get("stringKey")
-        map = getJsonObjectMap("mapKey", ComplexJsonObject::class)
-        list = getJsonObjectList("listKey", ComplexJsonObject::class)
+        map = getJsonObjectMap("mapKey", TestComplexJsonObject::class)
+        list = getJsonObjectList("listKey", TestComplexJsonObject::class)
     }
 }

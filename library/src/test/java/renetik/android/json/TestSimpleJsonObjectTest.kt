@@ -7,7 +7,7 @@ import org.robolectric.RobolectricTestRunner
 import renetik.android.json.obj.load
 
 @RunWith(RobolectricTestRunner::class)
-class SimpleJsonObjectTest {
+class TestSimpleJsonObjectTest {
     private val exceptedJson: String = """{
   "listKey": [
     1.2,
@@ -23,10 +23,10 @@ class SimpleJsonObjectTest {
 
     @Test
     fun customJsonObjectSetGetTest2() {
-        val instance = SimpleJsonObject("testObject",
+        val instance = TestSimpleJsonObject("testObject",
             mapOf("key1" to true, "key2" to false),
             listOf(1.2, 3.4, 5.0))
         assertEquals(exceptedJson, instance.toJson(formatted = true))
-        assertEquals(instance, SimpleJsonObject().load(exceptedJson))
+        assertEquals(instance, TestSimpleJsonObject().load(exceptedJson))
     }
 }
