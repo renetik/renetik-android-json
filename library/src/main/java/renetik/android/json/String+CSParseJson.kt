@@ -1,21 +1,20 @@
 package renetik.android.json
 
 import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
 import org.json.JSONTokener
 import renetik.android.core.kotlin.collections.linkedMap
 import renetik.android.core.kotlin.collections.list
-import renetik.android.core.lang.catchWarnReturnNull
+import renetik.android.core.logging.CSLog.logWarn
 
 fun String.parseJsonMap(): MutableMap<String, Any?>? = parseJson<MutableMap<String, Any?>>()
 
 fun String.parseJsonList(): MutableList<Any?>? = parseJson<MutableList<Any?>>()
 
 inline fun <reified Type> String.parseJson(): Type? =
-    if (isBlank()) null else catchWarnReturnNull<Any, JSONException> {
+    if (isBlank()) null else runCatching<Any> {
         JSONTokener(this).nextValue()
-    }.createValueFromJsonType() as? Type
+    }.onFailure(::logWarn).getOrNull().createValueFromJsonType() as? Type
 
 fun Any?.createValueFromJsonType(): Any? {
     if (this is Number || this is String || this is Boolean) return this
