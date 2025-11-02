@@ -4,7 +4,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
 import renetik.android.core.kotlin.collections.linkedMap
-import renetik.android.core.kotlin.collections.list
 import renetik.android.core.logging.CSLog.logWarn
 
 fun String.parseJsonMap(): MutableMap<String, Any?>? = parseJson<MutableMap<String, Any?>>()
@@ -24,8 +23,8 @@ fun Any?.createValueFromJsonType(): Any? {
 }
 
 private fun JSONArray.createListObject(): List<Any?> {
-    val list = list<Any?>()
-    for (index in 0 until length()) list.add(this[index].createValueFromJsonType())
+    val list = mutableListOf<Any?>()
+    for (index in 0 until length()) list += this[index].createValueFromJsonType()
     return list
 }
 
