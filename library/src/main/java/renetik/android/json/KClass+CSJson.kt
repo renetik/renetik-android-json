@@ -1,6 +1,7 @@
 package  renetik.android.json
 
 import renetik.android.core.kotlin.collections.list
+import renetik.android.core.kotlin.collections.put
 import renetik.android.json.array.CSJsonArray
 import renetik.android.json.obj.CSJsonObject
 import kotlin.reflect.KClass
@@ -14,7 +15,7 @@ fun <T : CSJsonArray> KClass<T>.createJsonList(list: List<Any?>?): T =
 
 fun <T : CSJsonObject> KClass<T>.createJsonObjectList(data: List<Map<String, Any?>>?)
         : MutableList<T> = list<T>().also { dataList ->
-    data?.forEach { dataList.put(createJsonObject(it)) }
+    data?.forEach { dataList += createJsonObject(it) }
 }
 
 fun <T : CSJsonObject> KClass<T>.createJsonObjectMap(
