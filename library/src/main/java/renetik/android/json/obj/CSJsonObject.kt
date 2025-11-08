@@ -92,7 +92,7 @@ open class CSJsonObject : CSJsonObjectInterface {
         onChange()
     }
 
-    override val jsonMap: Map<String, *> by lazy { data }
+    override val jsonMap: Map<String, *> get() = data
 
     override fun equals(other: Any?) =
         (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
