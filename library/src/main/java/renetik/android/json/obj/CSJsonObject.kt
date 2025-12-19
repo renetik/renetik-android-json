@@ -21,6 +21,8 @@ open class CSJsonObject : CSJsonObjectInterface {
         onChange()
     }
 
+    open fun get(key: String): Any? = data[key]
+
     open fun save(key: String, value: Any?) {
         data[key] = value
         onChange()
@@ -38,39 +40,46 @@ open class CSJsonObject : CSJsonObjectInterface {
         onChange()
     }
 
+    override val jsonMap: Map<String, *> get() = data
+
+    override fun equals(other: Any?) =
+        (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
+
+    override fun hashCode() = data.hashCode()
+
     override fun <T : CSJsonObject> getJsonObject(key: String, type: KClass<T>): T? =
-        (data[key] as? MutableMap<String, Any?>)?.let(type::createJsonObject)
+        (get(key) as? MutableMap<String, Any?>)?.let(type::createJsonObject)
 
     override fun <T : CSJsonObject> setJsonObject(key: String, value: T?) {
         val map: Map<String, *>? = value?.jsonMap
-        if (data[key] == map) return
+        if (get(key) == map) return
         save(key, map?.toMutableMap())
     }
 
     override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? =
-        (data[key] as? List<MutableMap<String, Any?>>)?.let { type.createJsonObjectList(it) }
+        (get(key) as? List<MutableMap<String, Any?>>)?.let { type.createJsonObjectList(it) }
 
     override fun <T : CSJsonObject> setJsonObjectList(key: String, list: List<T>?) {
         val value: List<MutableMap<String, Any?>>? =
             list?.let { List(list.size) { list[it].data } }
-        if (data[key] == value) return
+        if (get(key) == value) return
         save(key, value)
     }
 
     fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>? =
-        (data[key] as? Map<String, MutableMap<String, Any?>>)?.let { type.createJsonObjectMap(it) }
+        (get(key) as? Map<String, MutableMap<String, Any?>>)?.let { type.createJsonObjectMap(it) }
 
     fun <T : CSJsonObject> setJsonObjectMap(key: String, map: Map<String, T>?) {
         val value: Map<String, Map<String, Any?>>? = map?.let {
             buildMap(map.size) { map.forEach { (key, value) -> this[key] = value.data } }
         }
-        if (data[key] == value) return
+        if (get(key) == value) return
         save(key, value)
     }
 
     private fun setValue(key: String, value: Any?) {
         val jsonValue = value.toJsonType()
-        if (value != null && data[key] == jsonValue) return
+        if (value != null && get(key) == jsonValue) return
         save(key, jsonValue)
     }
 
@@ -82,19 +91,13 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun set(key: String, double: Double?) = setValue(key, double)
 
     override fun set(key: String, value: List<*>?) {
-        if (value != null && data[key] == value) return
+        if (value != null && get(key) == value) return
         save(key, value?.toList())
     }
 
     override fun set(key: String, value: Map<String, *>?) {
-        if (value != null && data[key] == value) return
+        if (value != null && get(key) == value) return
         save(key, value?.toMap())
     }
 
-    override val jsonMap: Map<String, *> get() = data
-
-    override fun equals(other: Any?) =
-        (other as? CSJsonObject)?.let { it.data == data } ?: super.equals(other)
-
-    override fun hashCode() = data.hashCode()
 }
