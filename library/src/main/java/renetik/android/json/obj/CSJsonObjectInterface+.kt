@@ -39,7 +39,7 @@ fun CSJsonObjectInterface.getFloatMap(key: String): Map<String, Float?>? =
     getMap(key)?.mapValues { it.value?.asFloat() }
 
 fun <T> CSJsonObjectInterface.getValue(key: String, values: Iterable<T>): T? {
-    val savedString = get(key) ?: return null
+    val savedString = getString(key) ?: return null
     return values.find { it.toId() == savedString }
 }
 

@@ -14,35 +14,37 @@ interface CSJsonObjectInterface : Iterable<Map.Entry<String, Any?>> {
     fun has(key: String): Boolean = jsonMap.containsKey(key)
     fun clear(key: String)
     fun clear()
-    fun get(key: String): String? {
+
+    fun getString(key: String, default: String): String = getString(key) ?: default
+    fun getString(key: String): String? {
         val value = jsonMap[key]
         return if (value == NULL) null else value?.toString()
     }
 
-    fun getString(key: String, default: String): String = get(key) ?: default
-    fun getString(key: String): String? = get(key)
     fun set(key: String, string: String?)
 
-    fun getBoolean(key: String, default: Boolean): Boolean = get(key)?.toBoolean() ?: default
+    fun getBoolean(key: String, default: Boolean): Boolean = getString(key)?.toBoolean() ?: default
     fun getBoolean(key: String, default: Boolean? = null): Boolean? =
-        get(key)?.toBoolean() ?: default
+        getString(key)?.toBoolean() ?: default
 
     fun set(key: String, boolean: Boolean?) = set(key, boolean?.toString())
 
-    fun getInt(key: String, default: Int): Int = get(key)?.asInt() ?: default
-    fun getInt(key: String, default: Int? = null): Int? = get(key)?.asInt() ?: default
+    fun getInt(key: String, default: Int): Int = getString(key)?.asInt() ?: default
+    fun getInt(key: String, default: Int? = null): Int? = getString(key)?.asInt() ?: default
     fun set(key: String, int: Int?) = set(key, int?.toString())
 
-    fun getLong(key: String, default: Long): Long = get(key)?.asLong() ?: default
-    fun getLong(key: String, default: Long? = null): Long? = get(key)?.asLong() ?: default
+    fun getLong(key: String, default: Long): Long = getString(key)?.asLong() ?: default
+    fun getLong(key: String, default: Long? = null): Long? = getString(key)?.asLong() ?: default
     fun set(key: String, long: Long?) = set(key, long?.toString())
 
-    fun getFloat(key: String, default: Float): Float = get(key)?.asFloat() ?: default
-    fun getFloat(key: String, default: Float? = null): Float? = get(key)?.asFloat() ?: default
+    fun getFloat(key: String, default: Float): Float = getString(key)?.asFloat() ?: default
+    fun getFloat(key: String, default: Float? = null): Float? = getString(key)?.asFloat() ?: default
     fun set(key: String, float: Float?) = set(key, float?.toString())
 
-    fun getDouble(key: String, default: Double): Double = get(key)?.asDouble() ?: default
-    fun getDouble(key: String, default: Double? = null): Double? = get(key)?.asDouble() ?: default
+    fun getDouble(key: String, default: Double): Double = getString(key)?.asDouble() ?: default
+    fun getDouble(key: String, default: Double? = null): Double? =
+        getString(key)?.asDouble() ?: default
+
     fun set(key: String, double: Double?) = set(key, double?.toString())
 
     fun getList(key: String) = jsonMap[key] as? List<Any?>

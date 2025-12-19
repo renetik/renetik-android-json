@@ -21,15 +21,20 @@ open class CSJsonObject : CSJsonObjectInterface {
         onChange()
     }
 
-    override fun clear() {
-        if (data.isEmpty()) return
-        data.clear()
-        onLoad()
+    open fun save(key: String, value: Any?) {
+        data[key] = value
         onChange()
     }
 
     override fun clear(key: String) {
         if (data.remove(key) == null) return
+        onChange()
+    }
+
+    override fun clear() {
+        if (data.isEmpty()) return
+        data.clear()
+        onLoad()
         onChange()
     }
 
@@ -39,8 +44,7 @@ open class CSJsonObject : CSJsonObjectInterface {
     override fun <T : CSJsonObject> setJsonObject(key: String, value: T?) {
         val map: Map<String, *>? = value?.jsonMap
         if (data[key] == map) return
-        data[key] = map?.toMutableMap()
-        onChange()
+        save(key, map?.toMutableMap())
     }
 
     override fun <T : CSJsonObject> getJsonObjectList(key: String, type: KClass<T>): List<T>? =
@@ -50,8 +54,7 @@ open class CSJsonObject : CSJsonObjectInterface {
         val value: List<MutableMap<String, Any?>>? =
             list?.let { List(list.size) { list[it].data } }
         if (data[key] == value) return
-        data[key] = value
-        onChange()
+        save(key, value)
     }
 
     fun <T : CSJsonObject> getJsonObjectMap(key: String, type: KClass<T>): Map<String, T>? =
@@ -62,15 +65,13 @@ open class CSJsonObject : CSJsonObjectInterface {
             buildMap(map.size) { map.forEach { (key, value) -> this[key] = value.data } }
         }
         if (data[key] == value) return
-        data[key] = value
-        onChange()
+        save(key, value)
     }
 
     private fun setValue(key: String, value: Any?) {
         val jsonValue = value.toJsonType()
         if (value != null && data[key] == jsonValue) return
-        data[key] = jsonValue
-        onChange()
+        save(key, jsonValue)
     }
 
     override fun set(key: String, string: String?) = setValue(key, string)
@@ -82,14 +83,12 @@ open class CSJsonObject : CSJsonObjectInterface {
 
     override fun set(key: String, value: List<*>?) {
         if (value != null && data[key] == value) return
-        data[key] = value?.toList()
-        onChange()
+        save(key, value?.toList())
     }
 
     override fun set(key: String, value: Map<String, *>?) {
         if (value != null && data[key] == value) return
-        data[key] = value?.toMap()
-        onChange()
+        save(key, value?.toMap())
     }
 
     override val jsonMap: Map<String, *> get() = data
