@@ -1,4 +1,4 @@
 package renetik.android.json
-//TODO: Rename to cloneJsonMap ?
-fun Map<String, Any?>.cloneDeep() =
+
+fun Map<String, Any?>.cloneJsonMap() =
     toJson(forceString = false, formatted = false).parseJsonMap()
