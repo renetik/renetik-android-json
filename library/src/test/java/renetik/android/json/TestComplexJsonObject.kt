@@ -14,7 +14,7 @@ data class TestComplexJsonObject(
     }
 
     override fun onLoad() {
-        string = get("stringKey")
+        string = getString("stringKey")
         map = getJsonObjectMap("mapKey", TestComplexJsonObject::class)
         list = getJsonObjectList("listKey", TestComplexJsonObject::class)
     }

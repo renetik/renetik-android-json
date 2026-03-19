@@ -16,7 +16,7 @@ data class TestSimpleJsonObject(
     }
 
     override fun onLoad() {
-        string = get("stringKey")
+        string = getString("stringKey")
         map = getBooleanMap("mapKey", default = false)
         list = getDoubleList("listKey", default = 0.0)
     }
