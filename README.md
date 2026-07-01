@@ -11,23 +11,6 @@ Used as library in many projects and improving it while developing new projects.
 for [Hire](https://renetik.github.io) or investment in my mobile app music production & perfromance
 project Renetik Instruments www.renetik.com.
 
-```gradle
-allprojects {
-    repositories {
-        maven { url 'https://github.com/renetik/maven-snapshot/raw/master/repository' } //for master-SNAPSHOT
-        maven { url 'https://github.com/renetik/maven/raw/master/repository' } 
-    }
-}
-```
-
-Step 2. Add the dependency
-
-```gradle
-dependencies {
-    implementation 'com.renetik.library:renetik-android-json:$renetik-android-verison'
-}
-```
-
 ## Examples
 
 ```kotlin
