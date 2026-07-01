@@ -1,20 +1,14 @@
 buildscript {
     ext {
-        renetik_android_core = "com.renetik.library:renetik-android-core:$renetik_library_version"
-        renetik_android_event = "com.renetik.library:renetik-android-event:$renetik_library_version"
-        renetik_android_json = "com.renetik.library:renetik-android-json:$renetik_library_version"
-        renetik_android_store = "com.renetik.library:renetik-android-store:$renetik_library_version"
-        renetik_android_preset = "com.renetik.library:renetik-android-preset:$renetik_library_version"
-        renetik_android_ui = "com.renetik.library:renetik-android-ui:$renetik_library_version"
-        renetik_android_framework = "com.renetik.library:renetik-android-framework:$renetik_library_version"
         sdk_version = 36
         min_sdk_version = 26
+        kotlin_version = '2.3.21'
+        coroutines_version = '1.11.0'
         appcompat_version = '1.7.1'
         material_version = '1.9.0'
         ktx_version = '1.18.0'
         junit_version = '4.13.2'
         play_version = '18.0.1'
-        kotlin_version = '2.3.21'
         is_renetik_development = false
     }
 }
